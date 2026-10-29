@@ -2,14 +2,14 @@ package com.npo.donation;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;                 // ADJUST packages to match your project
+import java.util.List;
 import java.util.Map;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;                        // ADJUST
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,42 +23,23 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.mongodb.client.model.Filters;
 import com.npo.common.DatabaseConnection;
+import com.npo.payment.CashPayment;
+import com.npo.payment.CheckPayment;
+import com.npo.payment.IPaymentMethod;
+import com.npo.payment.OnlinePayment;
 import com.npo.user.Donor;
 
 /**
  * Controller (MVC) for donations. View: React DonationPage (JSON over REST).
- * Factory Method: creatorFor() picks MoneyDonationCreator or InKindDonationCreator,
- * and registerDonation() on the creator builds and saves the right Donation subclass.
+ * Factory Method: creatorFor() picks MoneyDonationCreator or InKindDonationCreator.
+ * Strategy: paymentFor() builds the payment method and gives it to the MoneyDonation (context).
  */
 @RestController
 @RequestMapping("/api/donations")
 @CrossOrigin(origins = "http://localhost:5173")
 public class DonationController {
 
-    // ===================================================================
-    // ADJUST: the only parts that depend on your model details
-    // ===================================================================
-
-    /** Collection that Donation.create() writes to. */
     private static final String COLLECTION = "donations";
-
-    /** Loads the donor with this id (assumes Donor() + read(id) like the other models). */
-    private static Donor loadDonor(String donorId) {
-        Donor donor = new Donor();
-        if (donor.read(donorId) == null) {
-            throw notFound("Donor not found");
-        }
-        return donor;
-    }
-
-    /** Empty subclass instance for the stored "type" value (matches MONEY, Money, IN_KIND, in-kind...). */
-    private static Donation emptyDonation(String storedType) {
-        String t = storedType == null ? "" : storedType.toLowerCase();
-        if (t.contains("money")) return new MoneyDonation();
-        if (t.contains("kind")) return new InKindDonation();
-        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                "Unknown donation type stored in database: " + storedType);
-    }
 
     // ===================================================================
     // Endpoints
@@ -80,20 +61,45 @@ public class DonationController {
         return toResponse(findDocument(id));
     }
 
-    // POST /api/donations   body: { type, donorId, amount, currency } or { type, donorId, itemName, quantity, estimatedValue }
+    // POST /api/donations
+    // body (money):   { type: "money", donorId, amount, currency, paymentMethod, receivedBy | checkNo+bankName | cardHolder }
+    // body (in-kind): { type: "in-kind", donorId, itemName, quantity, estimatedValue }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Map<String, Object> donate(@RequestBody Map<String, Object> data) {
         Donor donor = loadDonor(text(data, "donorId"));
-        DonationCreator creator = creatorFor(data);               // Factory Method
+        DonationCreator creator = creatorFor(data);                 // Factory Method
         Donation donation = creator.registerDonation(donor);
-        if (donation.getId() == null) {                           // in case registerDonation does not save
-            donation.create();
+
+        if (donation instanceof MoneyDonation) {                     // Strategy
+            IPaymentMethod payment = paymentFor(data);
+            if (payment != null) {                                   // null = pay later
+                MoneyDonation money = (MoneyDonation) donation;
+                money.setPaymentMethod(payment);
+                money.processPayment();
+            }
         }
         return toResponse(findDocument(donation.getId()));
     }
 
-    // PUT /api/donations/{id}   body: { status }   (donation records keep their amounts; only the status changes)
+    // POST /api/donations/{id}/pay   body: { paymentMethod, receivedBy | checkNo+bankName | cardHolder }
+    @PostMapping("/{id}/pay")
+    public Map<String, Object> pay(@PathVariable String id, @RequestBody Map<String, Object> data) {
+        Donation donation = loadDonation(id);
+        if (!(donation instanceof MoneyDonation)) {
+            throw badRequest("Only money donations can be paid");
+        }
+        IPaymentMethod payment = paymentFor(data);
+        if (payment == null) {
+            throw badRequest("Choose a payment method");
+        }
+        MoneyDonation money = (MoneyDonation) donation;
+        money.setPaymentMethod(payment);
+        money.processPayment();
+        return toResponse(findDocument(id));
+    }
+
+    // PUT /api/donations/{id}   body: { status }   (only the status can change)
     @PutMapping("/{id}")
     public Map<String, Object> editDonation(@PathVariable String id,
                                             @RequestBody Map<String, Object> data) {
@@ -111,7 +117,7 @@ public class DonationController {
     }
 
     // ===================================================================
-    // Helpers
+    // Pattern helpers
     // ===================================================================
 
     /** Factory Method: choose the creator from the request. */
@@ -135,6 +141,41 @@ public class DonationController {
         }
     }
 
+    /** Strategy pattern: build the payment method the user chose (null = pay later). */
+    private static IPaymentMethod paymentFor(Map<String, Object> data) {
+        Object method = data.get("paymentMethod");
+        if (method == null || method.toString().isEmpty()) {
+            return null;
+        }
+        switch (method.toString()) {
+            case "cash":   return new CashPayment(text(data, "receivedBy"));
+            case "check":  return new CheckPayment(text(data, "checkNo"), text(data, "bankName"));
+            case "online": return new OnlinePayment(text(data, "cardHolder"));
+            default: throw badRequest("Unknown payment method: " + method);
+        }
+    }
+
+    // ===================================================================
+    // Loading helpers
+    // ===================================================================
+
+    private static Donor loadDonor(String donorId) {
+        Donor donor = new Donor();
+        if (donor.read(donorId) == null) {
+            throw notFound("Donor not found");
+        }
+        return donor;
+    }
+
+    /** Empty subclass instance for the stored "type" value (MONEY or IN_KIND). */
+    private static Donation emptyDonation(String storedType) {
+        String t = storedType == null ? "" : storedType.toLowerCase();
+        if (t.contains("money")) return new MoneyDonation();
+        if (t.contains("kind")) return new InKindDonation();
+        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                "Unknown donation type stored in database: " + storedType);
+    }
+
     private static Document findDocument(String id) {
         Document doc = DatabaseConnection.getInstance().selectById(COLLECTION, id);
         if (doc == null) throw notFound("Donation not found");
@@ -148,7 +189,11 @@ public class DonationController {
         return donation;
     }
 
-    /** Mongo document to JSON-friendly map (ObjectId becomes a hex string, _id becomes id). */
+    // ===================================================================
+    // JSON helpers
+    // ===================================================================
+
+    /** Mongo document to JSON-friendly map (_id becomes id, ObjectIds become strings). */
     private static Map<String, Object> toResponse(Document doc) {
         Map<String, Object> out = new LinkedHashMap<>();
         for (Map.Entry<String, Object> e : doc.entrySet()) {

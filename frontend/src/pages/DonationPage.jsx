@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 // ---- Config ----
 const API = import.meta.env.VITE_API_URL || 'http://localhost:8080/api'
-const STATUSES = ['PENDING', 'RECEIVED', 'CANCELLED']
+const STATUSES = ['PENDING', 'COMPLETED', 'FAILED', 'RECEIVED', 'CANCELLED']
 
 // ---- API client (talks to DonationController) ----
 async function request(path, options) {
@@ -72,14 +72,13 @@ function paymentPayload(p) {
   }
 }
 
-function PaymentFields({ value, onChange, allowLater }) {
+function PaymentFields({ value, onChange}) {
   const set = (field) => (e) => onChange({ ...value, [field]: e.target.value })
   return (
     <>
       <label style={s.label}>
         Payment method
         <select style={s.input} value={value.paymentMethod} onChange={set('paymentMethod')}>
-          {allowLater && <option value="">Pay later</option>}
           <option value="cash">Cash</option>
           <option value="check">Check</option>
           <option value="online">Online (card)</option>

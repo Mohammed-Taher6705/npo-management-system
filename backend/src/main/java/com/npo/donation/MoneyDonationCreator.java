@@ -13,8 +13,6 @@ public class MoneyDonationCreator extends DonationCreator {
 
     @Override
     public Donation createDonation(Donor donor) {
-            MoneyDonation d = new MoneyDonation(donor, amount, currency);
-    d.setPaymentMethod(paymentMethod);
-    return d;
+        return new MoneyDonation(donor, amount, currency);
     }
 }

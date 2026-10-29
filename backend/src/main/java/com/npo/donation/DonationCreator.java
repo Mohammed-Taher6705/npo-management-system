@@ -15,7 +15,6 @@ public abstract class DonationCreator {
     public Donation registerDonation(Donor donor) {
         Donation donation = createDonation(donor);     // subclass decides the type
         donation.create();                             // save to MongoDB
-        donor.addToTotal(donation.getAmount());        // update the donor's total
         return donation;
     }
 }

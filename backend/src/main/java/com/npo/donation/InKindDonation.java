@@ -26,14 +26,16 @@ public class InKindDonation extends Donation {
         return estimatedValue;
     }
 
-    @Override
-    public void create() {
-        super.create();
-        Document data = new Document("itemName", itemName)
-                .append("quantity", quantity)
-                .append("estimatedValue", estimatedValue);
-        DatabaseConnection.getInstance().update("donations", id, data);
-    }
+   @Override
+public void create() {
+    super.create();
+    Document data = new Document("itemName", itemName)
+            .append("quantity", quantity)
+            .append("estimatedValue", estimatedValue);
+    DatabaseConnection.getInstance().update("donations", id, data);
+
+    donor.addToTotal(estimatedValue);     // items count as soon as they are received
+}
 
     @Override
     public InKindDonation read(String id) {

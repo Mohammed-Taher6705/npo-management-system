@@ -9,7 +9,7 @@ import com.npo.user.Donor;
 public class MoneyDonation extends Donation {
     private double amount;
     private String currency;
-    private IPaymentMethod paymentMethod;     // Strategy pattern (payment)
+    private IPaymentMethod paymentMethod;     // Strategy pattern: the context holds the strategy
 
     public MoneyDonation() {
         type = "MONEY";
@@ -53,6 +53,7 @@ public class MoneyDonation extends Donation {
     public boolean processPayment() {
         if (paymentMethod.pay(amount)) {
             status = "COMPLETED";
+            donor.addToTotal(amount);          // count it only when the money is actually paid
         } else {
             status = "FAILED";
         }
