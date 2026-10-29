@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram id="phase1" name="Phase 1 - Class Diagram">
-    <mxGraphModel dx="9835" dy="3860" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3830" pageHeight="2658" background="light-dark(#ffffff, #121212)" math="0" shadow="0">
+    <mxGraphModel dx="8620" dy="2620" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3830" pageHeight="2658" background="light-dark(#ffffff, #121212)" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -443,7 +443,7 @@
           <mxGeometry height="212" width="290" y="78" as="geometry" />
         </mxCell>
         <mxCell id="c_Volunteer" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;Volunteer&lt;/b&gt;" vertex="1">
-          <mxGeometry height="178" width="260" x="2190" y="1420" as="geometry" />
+          <mxGeometry height="258" width="260" x="2190" y="1420" as="geometry" />
         </mxCell>
         <mxCell id="c_Volunteer-0" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- skills: List&amp;lt;Skill&amp;gt;" vertex="1">
           <mxGeometry height="20" width="260" y="30" as="geometry" />
@@ -469,8 +469,20 @@
         <mxCell id="c_Volunteer-7" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ getHours(): double" vertex="1">
           <mxGeometry height="20" width="260" y="158" as="geometry" />
         </mxCell>
+        <mxCell id="CGyDe_sJBHAZSBF8VBPh-1" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ addHours(h: double): void" vertex="1">
+          <mxGeometry height="20" width="260" y="178" as="geometry" />
+        </mxCell>
+        <mxCell id="CGyDe_sJBHAZSBF8VBPh-2" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ getskills(): List&amp;lt;skill&amp;gt;" vertex="1">
+          <mxGeometry height="20" width="260" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="CGyDe_sJBHAZSBF8VBPh-3" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ getAvailability(): String" vertex="1">
+          <mxGeometry height="20" width="260" y="218" as="geometry" />
+        </mxCell>
+        <mxCell id="CGyDe_sJBHAZSBF8VBPh-4" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ savevolunteerFields(): void" vertex="1">
+          <mxGeometry height="20" width="260" y="238" as="geometry" />
+        </mxCell>
         <mxCell id="c_Beneficiary" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;Beneficiary&lt;/b&gt;" vertex="1">
-          <mxGeometry height="158" width="210" x="1900" y="1420" as="geometry" />
+          <mxGeometry height="258" width="210" x="1899" y="1375" as="geometry" />
         </mxCell>
         <mxCell id="c_Beneficiary-0" parent="c_Beneficiary" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- address: string" vertex="1">
           <mxGeometry height="20" width="210" y="30" as="geometry" />
@@ -493,23 +505,26 @@
         <mxCell id="c_Beneficiary-6" parent="c_Beneficiary" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ getNeeds(): List&amp;lt;Need&amp;gt;" vertex="1">
           <mxGeometry height="20" width="210" y="138" as="geometry" />
         </mxCell>
+        <mxCell id="CGyDe_sJBHAZSBF8VBPh-6" parent="c_Beneficiary" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ getAddress(): String" vertex="1">
+          <mxGeometry height="20" width="210" y="158" as="geometry" />
+        </mxCell>
+        <mxCell id="CGyDe_sJBHAZSBF8VBPh-7" parent="c_Beneficiary" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ getFamilySize(): int" vertex="1">
+          <mxGeometry height="20" width="210" y="178" as="geometry" />
+        </mxCell>
+        <mxCell id="CGyDe_sJBHAZSBF8VBPh-8" parent="c_Beneficiary" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ setAddress(address:string): void" vertex="1">
+          <mxGeometry height="20" width="210" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="CGyDe_sJBHAZSBF8VBPh-9" parent="c_Beneficiary" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ setFamilySize(familySize: int): void" vertex="1">
+          <mxGeometry height="20" width="210" y="218" as="geometry" />
+        </mxCell>
+        <mxCell id="CGyDe_sJBHAZSBF8VBPh-10" parent="c_Beneficiary" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- saveBeneficiaryFields&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;(): void&lt;/span&gt;" vertex="1">
+          <mxGeometry height="20" width="210" y="238" as="geometry" />
+        </mxCell>
         <mxCell id="c_Admin" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;Admin&lt;/b&gt;" vertex="1">
-          <mxGeometry height="118" width="320" x="1500" y="1420" as="geometry" />
+          <mxGeometry height="50" width="320" x="1500" y="1420" as="geometry" />
         </mxCell>
-        <mxCell id="c_Admin-0" parent="c_Admin" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- role: string" vertex="1">
+        <mxCell id="c_Admin-3" parent="c_Admin" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ getAllUsers(): List&amp;lt;Document&amp;gt;" vertex="1">
           <mxGeometry height="20" width="320" y="30" as="geometry" />
-        </mxCell>
-        <mxCell id="c_Admin-1" parent="c_Admin" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- permissions: List&amp;lt;string&amp;gt;" vertex="1">
-          <mxGeometry height="20" width="320" y="50" as="geometry" />
-        </mxCell>
-        <mxCell id="c_Admin-2" parent="c_Admin" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="320" y="70" as="geometry" />
-        </mxCell>
-        <mxCell id="c_Admin-3" parent="c_Admin" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ hasPermission(p: string): bool" vertex="1">
-          <mxGeometry height="20" width="320" y="78" as="geometry" />
-        </mxCell>
-        <mxCell id="c_Admin-4" parent="c_Admin" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ grantPermission(u: User, p: string): void" vertex="1">
-          <mxGeometry height="20" width="320" y="98" as="geometry" />
         </mxCell>
         <mxCell id="c_Event" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;Event&lt;/b&gt;" vertex="1">
           <mxGeometry height="438" width="280" x="2560" y="900" as="geometry" />
@@ -791,7 +806,7 @@
           <mxGeometry height="20" width="230" y="118" as="geometry" />
         </mxCell>
         <mxCell id="c_ICommunicationStrategy" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;swimlaneFillColor=#ffffff;fontSize=12;" value="«interface»&lt;br&gt;&lt;b&gt;ICommunicationStrategy&lt;/b&gt;" vertex="1">
-          <mxGeometry height="100" width="270" x="480" y="1980" as="geometry" />
+          <mxGeometry height="100" width="270" x="480" y="1979" as="geometry" />
         </mxCell>
         <mxCell id="c_ICommunicationStrategy-0" parent="c_ICommunicationStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ send(to: User, msg: string): bool" vertex="1">
           <mxGeometry height="20" width="270" y="40" as="geometry" />
@@ -803,61 +818,40 @@
           <mxGeometry height="20" width="270" y="80" as="geometry" />
         </mxCell>
         <mxCell id="c_EmailStrategy" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;EmailStrategy&lt;/b&gt;" vertex="1">
-          <mxGeometry height="118" width="270" x="130" y="2180" as="geometry" />
-        </mxCell>
-        <mxCell id="c_EmailStrategy-0" parent="c_EmailStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- smtpServer: string" vertex="1">
-          <mxGeometry height="20" width="270" y="30" as="geometry" />
-        </mxCell>
-        <mxCell id="c_EmailStrategy-1" parent="c_EmailStrategy" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="270" y="50" as="geometry" />
+          <mxGeometry height="90" width="270" x="130" y="2183" as="geometry" />
         </mxCell>
         <mxCell id="c_EmailStrategy-2" parent="c_EmailStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ send(to: User, msg: string): bool" vertex="1">
-          <mxGeometry height="20" width="270" y="58" as="geometry" />
+          <mxGeometry height="20" width="270" y="30" as="geometry" />
         </mxCell>
         <mxCell id="c_EmailStrategy-3" parent="c_EmailStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ formatMessage(msg: string): string" vertex="1">
-          <mxGeometry height="20" width="270" y="78" as="geometry" />
-        </mxCell>
-        <mxCell id="c_EmailStrategy-4" parent="c_EmailStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ validateRecipient(to: User): bool" vertex="1">
-          <mxGeometry height="20" width="270" y="98" as="geometry" />
-        </mxCell>
-        <mxCell id="c_SMSStrategy" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;SMSStrategy&lt;/b&gt;" vertex="1">
-          <mxGeometry height="118" width="270" x="480" y="2180" as="geometry" />
-        </mxCell>
-        <mxCell id="c_SMSStrategy-0" parent="c_SMSStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- provider: string" vertex="1">
-          <mxGeometry height="20" width="270" y="30" as="geometry" />
-        </mxCell>
-        <mxCell id="c_SMSStrategy-1" parent="c_SMSStrategy" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="270" y="50" as="geometry" />
-        </mxCell>
-        <mxCell id="c_SMSStrategy-2" parent="c_SMSStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ send(to: User, msg: string): bool" vertex="1">
-          <mxGeometry height="20" width="270" y="58" as="geometry" />
-        </mxCell>
-        <mxCell id="c_SMSStrategy-3" parent="c_SMSStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ formatMessage(msg: string): string" vertex="1">
-          <mxGeometry height="20" width="270" y="78" as="geometry" />
-        </mxCell>
-        <mxCell id="c_SMSStrategy-4" parent="c_SMSStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ validateRecipient(to: User): bool" vertex="1">
-          <mxGeometry height="20" width="270" y="98" as="geometry" />
-        </mxCell>
-        <mxCell id="c_SocialMediaStrategy" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;SocialMediaStrategy&lt;/b&gt;" vertex="1">
-          <mxGeometry height="138" width="270" x="830" y="2180" as="geometry" />
-        </mxCell>
-        <mxCell id="c_SocialMediaStrategy-0" parent="c_SocialMediaStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- platform: string" vertex="1">
-          <mxGeometry height="20" width="270" y="30" as="geometry" />
-        </mxCell>
-        <mxCell id="c_SocialMediaStrategy-1" parent="c_SocialMediaStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- accessToken: string" vertex="1">
           <mxGeometry height="20" width="270" y="50" as="geometry" />
         </mxCell>
-        <mxCell id="c_SocialMediaStrategy-2" parent="c_SocialMediaStrategy" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="270" y="70" as="geometry" />
+        <mxCell id="c_EmailStrategy-4" parent="c_EmailStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ validateRecipient(to: User): bool" vertex="1">
+          <mxGeometry height="20" width="270" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c_SMSStrategy" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;SMSStrategy&lt;/b&gt;" vertex="1">
+          <mxGeometry height="90" width="270" x="480" y="2180" as="geometry" />
+        </mxCell>
+        <mxCell id="c_SMSStrategy-2" parent="c_SMSStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ send(to: User, msg: string): bool" vertex="1">
+          <mxGeometry height="20" width="270" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c_SMSStrategy-3" parent="c_SMSStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ formatMessage(msg: string): string" vertex="1">
+          <mxGeometry height="20" width="270" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c_SMSStrategy-4" parent="c_SMSStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ validateRecipient(to: User): bool" vertex="1">
+          <mxGeometry height="20" width="270" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c_SocialMediaStrategy" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;SocialMediaStrategy&lt;/b&gt;" vertex="1">
+          <mxGeometry height="90" width="270" x="830" y="2180" as="geometry" />
         </mxCell>
         <mxCell id="c_SocialMediaStrategy-3" parent="c_SocialMediaStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ send(to: User, msg: string): bool" vertex="1">
-          <mxGeometry height="20" width="270" y="78" as="geometry" />
+          <mxGeometry height="20" width="270" y="30" as="geometry" />
         </mxCell>
         <mxCell id="c_SocialMediaStrategy-4" parent="c_SocialMediaStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ formatMessage(msg: string): string" vertex="1">
-          <mxGeometry height="20" width="270" y="98" as="geometry" />
+          <mxGeometry height="20" width="270" y="50" as="geometry" />
         </mxCell>
         <mxCell id="c_SocialMediaStrategy-5" parent="c_SocialMediaStrategy" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ validateRecipient(to: User): bool" vertex="1">
-          <mxGeometry height="20" width="270" y="118" as="geometry" />
+          <mxGeometry height="20" width="270" y="70" as="geometry" />
         </mxCell>
         <mxCell id="c_Notification" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;Notification&lt;/b&gt;" vertex="1">
           <mxGeometry height="198" width="340" x="1150" y="900" as="geometry" />
@@ -1284,10 +1278,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="e38" edge="1" parent="1" source="c_Volunteer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=open;endFill=0;endSize=10;exitX=0.076923;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.317;entryY=0.002;entryDx=0;entryDy=0;entryPerimeter=0;" target="c_Skill" value="">
-          <mxGeometry relative="1" x="0.0644" as="geometry">
+          <mxGeometry relative="1" x="0.0649" as="geometry">
             <Array as="points">
-              <mxPoint x="2210" y="1680" />
-              <mxPoint x="2087.8" y="1680" />
+              <mxPoint x="2210" y="1688.1" />
+              <mxPoint x="2127.8" y="1688.1" />
             </Array>
           </mxGeometry>
         </mxCell>

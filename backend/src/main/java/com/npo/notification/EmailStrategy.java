@@ -4,11 +4,10 @@ import com.npo.user.User;
 
 /** Concrete Strategy: delivers by email (simulated in Phase 1). */
 public class EmailStrategy implements ICommunicationStrategy {
-    private final String smtpServer = "smtp.npo.org";
 
     @Override
     public boolean send(User to, String msg) {
-        return validateRecipient(to);   // real SMTP sending would go here
+        return validateRecipient(to);   
     }
 
     @Override
@@ -21,5 +20,4 @@ public class EmailStrategy implements ICommunicationStrategy {
         return to.getEmail() != null && to.getEmail().contains("@");
     }
 
-    public String getSmtpServer() { return smtpServer; }
 }

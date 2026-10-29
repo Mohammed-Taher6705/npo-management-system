@@ -1,20 +1,20 @@
 package com.npo.notification;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.npo.common.DatabaseConnection;
 import com.npo.user.User;
+
+import org.bson.Document;
+
 
 /**
  * Strategy pattern context: holds the chosen ICommunicationStrategy and uses it to send.
  * Every notification is saved in the "notifications" collection so the React UI can show it.
  */
 public class Notification {
-    private final User recipient;
-    private final String content;
-    private final Date date = new Date();
+    private  User recipient;
+    private  String content;
+    private  Date date = new Date();
     private String status = "PENDING";
     private ICommunicationStrategy strategy;
 
@@ -28,20 +28,25 @@ public class Notification {
     }
 
     public boolean send() {
-        if (strategy == null) throw new IllegalStateException("No communication strategy set");
-        String text = strategy.formatMessage(content);
-        boolean ok = strategy.send(recipient, text);
-        status = ok ? "SENT" : "FAILED";
+        String text = strategy.formatMessage(content);       
+        boolean sent = strategy.send(recipient, text);        
 
-        Map<String, Object> data = new HashMap<>();
-        data.put("recipientId", recipient.getId());
-        data.put("channel", strategy.getClass().getSimpleName());
-        data.put("content", text);
-        data.put("date", date);
-        data.put("status", status);
+        if (sent) {                                           
+            status = "SENT";
+        } else {
+            status = "FAILED";
+        }
+
+        Document data = new Document("recipientId", recipient.getId())   
+                .append("content", text)
+                .append("date", date)
+                .append("status", status);
         DatabaseConnection.getInstance().insert("notifications", data);
-        return ok;
+
+        return sent;
     }
+
+
 
     public String getStatus() { return status; }
 }

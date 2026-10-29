@@ -4,11 +4,10 @@ import com.npo.user.User;
 
 /** Concrete Strategy: delivers by SMS (simulated in Phase 1). */
 public class SMSStrategy implements ICommunicationStrategy {
-    private final String provider = "LocalSMSGateway";
 
     @Override
     public boolean send(User to, String msg) {
-        return validateRecipient(to);   // real SMS gateway call would go here
+        return validateRecipient(to);   
     }
 
     @Override
@@ -21,5 +20,4 @@ public class SMSStrategy implements ICommunicationStrategy {
         return to.getPhone() != null && to.getPhone().matches("\\+?[0-9 ]{8,15}");
     }
 
-    public String getProvider() { return provider; }
 }
