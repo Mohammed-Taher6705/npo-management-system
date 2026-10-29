@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram id="phase1" name="Phase 1 - Class Diagram">
-    <mxGraphModel dx="8620" dy="2620" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3830" pageHeight="2658" background="light-dark(#ffffff, #121212)" math="0" shadow="0">
+    <mxGraphModel dx="4952" dy="721" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3830" pageHeight="2658" background="light-dark(#ffffff, #121212)" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -32,34 +32,16 @@
           <mxGeometry height="20" width="240" y="140" as="geometry" />
         </mxCell>
         <mxCell id="c_DonationView" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;DonationView&lt;/b&gt;" vertex="1">
-          <mxGeometry height="198" width="300" x="400" y="300" as="geometry" />
+          <mxGeometry height="250" width="310" x="380" y="230" as="geometry" />
         </mxCell>
-        <mxCell id="c_DonationView-0" parent="c_DonationView" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- title: string" vertex="1">
-          <mxGeometry height="20" width="300" y="30" as="geometry" />
+        <mxCell id="c_DonationView-0" parent="c_DonationView" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- items: List&lt;br/&gt;- form: Object&lt;br/&gt;- selected: Object&lt;br/&gt;- message: Object&lt;br/&gt;- loading: bool" vertex="1">
+          <mxGeometry height="80" width="310" y="30" as="geometry" />
         </mxCell>
         <mxCell id="c_DonationView-1" parent="c_DonationView" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="300" y="50" as="geometry" />
+          <mxGeometry height="8" width="310" y="110" as="geometry" />
         </mxCell>
-        <mxCell id="c_DonationView-2" parent="c_DonationView" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ render(data: Object): void" vertex="1">
-          <mxGeometry height="20" width="300" y="58" as="geometry" />
-        </mxCell>
-        <mxCell id="c_DonationView-3" parent="c_DonationView" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ showList(items: List): void" vertex="1">
-          <mxGeometry height="20" width="300" y="78" as="geometry" />
-        </mxCell>
-        <mxCell id="c_DonationView-4" parent="c_DonationView" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ showForm(): void" vertex="1">
-          <mxGeometry height="20" width="300" y="98" as="geometry" />
-        </mxCell>
-        <mxCell id="c_DonationView-5" parent="c_DonationView" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ showMessage(msg: string): void" vertex="1">
-          <mxGeometry height="20" width="300" y="118" as="geometry" />
-        </mxCell>
-        <mxCell id="c_DonationView-6" parent="c_DonationView" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ showError(msg: string): void" vertex="1">
-          <mxGeometry height="20" width="300" y="138" as="geometry" />
-        </mxCell>
-        <mxCell id="c_DonationView-7" parent="c_DonationView" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ refresh(): void" vertex="1">
-          <mxGeometry height="20" width="300" y="158" as="geometry" />
-        </mxCell>
-        <mxCell id="c_DonationView-8" parent="c_DonationView" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ showDonationSummary(d: Donation): void" vertex="1">
-          <mxGeometry height="20" width="300" y="178" as="geometry" />
+        <mxCell id="c_DonationView-8" parent="c_DonationView" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ render(data: Object): void&lt;br/&gt;+ showList(items: List): void&lt;br/&gt;+ showForm(): void&lt;br/&gt;+ showMessage(msg: string): void&lt;br/&gt;+ showError(msg: string): void&lt;br/&gt;+ refresh(): void&lt;br/&gt;+ showDonationSummary(d: Donation): void&lt;br/&gt;+ save(): void&lt;br/&gt;+ changeStatus(d: Donation, status: string): void&lt;br/&gt;+ remove(d: Donation): void" vertex="1">
+          <mxGeometry height="132" width="310" y="118" as="geometry" />
         </mxCell>
         <mxCell id="c_UserView" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;UserView&lt;/b&gt;" vertex="1">
           <mxGeometry height="198" width="250" x="1600" y="300" as="geometry" />
@@ -194,34 +176,16 @@
           <mxGeometry height="20" width="300" y="178" as="geometry" />
         </mxCell>
         <mxCell id="c_DonationController" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;DonationController&lt;/b&gt;" vertex="1">
-          <mxGeometry height="198" width="300" x="400" y="560" as="geometry" />
+          <mxGeometry height="240" width="270" x="400" y="560" as="geometry" />
         </mxCell>
-        <mxCell id="c_DonationController-0" parent="c_DonationController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- view: DonationView" vertex="1">
-          <mxGeometry height="20" width="300" y="30" as="geometry" />
-        </mxCell>
-        <mxCell id="c_DonationController-1" parent="c_DonationController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- creator: DonationCreator" vertex="1">
-          <mxGeometry height="20" width="300" y="50" as="geometry" />
+        <mxCell id="c_DonationController-1" parent="c_DonationController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="&lt;u&gt;- COLLECTION: string&lt;/u&gt;" vertex="1">
+          <mxGeometry height="20" width="270" y="30" as="geometry" />
         </mxCell>
         <mxCell id="c_DonationController-2" parent="c_DonationController" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="300" y="70" as="geometry" />
+          <mxGeometry height="8" width="270" y="50" as="geometry" />
         </mxCell>
-        <mxCell id="c_DonationController-3" parent="c_DonationController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ setCreator(c: DonationCreator): void" vertex="1">
-          <mxGeometry height="20" width="300" y="78" as="geometry" />
-        </mxCell>
-        <mxCell id="c_DonationController-4" parent="c_DonationController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ donate(donor: Donor, data: Map): void" vertex="1">
-          <mxGeometry height="20" width="300" y="98" as="geometry" />
-        </mxCell>
-        <mxCell id="c_DonationController-5" parent="c_DonationController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ getDonation(id: int): void" vertex="1">
-          <mxGeometry height="20" width="300" y="118" as="geometry" />
-        </mxCell>
-        <mxCell id="c_DonationController-6" parent="c_DonationController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ editDonation(id: int, data: Map): void" vertex="1">
-          <mxGeometry height="20" width="300" y="138" as="geometry" />
-        </mxCell>
-        <mxCell id="c_DonationController-7" parent="c_DonationController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ deleteDonation(id: int): void" vertex="1">
-          <mxGeometry height="20" width="300" y="158" as="geometry" />
-        </mxCell>
-        <mxCell id="c_DonationController-8" parent="c_DonationController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ listDonations(): void" vertex="1">
-          <mxGeometry height="20" width="300" y="178" as="geometry" />
+        <mxCell id="c_DonationController-8" parent="c_DonationController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ listDonations(): List&amp;lt;Map&amp;gt;&lt;br&gt;+ getDonation(id: string): Map&lt;br&gt;+ donate(data: Map): Map&lt;br&gt;+ editDonation(id: string, data: Map): Map&lt;br&gt;+ deleteDonation(id: string): void&lt;br&gt;&lt;u&gt;- creatorFor(data: Map): DonationCreator&amp;nbsp;&lt;br&gt;- loadDonor(donorId: string): Donor&amp;nbsp;&lt;br&gt;- loadDonation(id: string): Donation&amp;nbsp;&lt;br&gt;- emptyDonation(storedType: string): Donation&amp;nbsp;&lt;br&gt;- findDocument(id: string): Document&lt;br&gt;- toResponse(doc: Document): Map&lt;/u&gt;" vertex="1">
+          <mxGeometry height="182" width="270" y="58" as="geometry" />
         </mxCell>
         <mxCell id="c_UserController" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;UserController&lt;/b&gt;" vertex="1">
           <mxGeometry height="198" width="410" x="1600" y="560" as="geometry" />
@@ -746,64 +710,46 @@
           <mxGeometry height="20" width="230" y="80" as="geometry" />
         </mxCell>
         <mxCell id="c_CashPayment" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;CashPayment&lt;/b&gt;" vertex="1">
-          <mxGeometry height="118" width="230" x="190" y="1720" as="geometry" />
+          <mxGeometry height="138" width="280" x="190" y="1720" as="geometry" />
         </mxCell>
         <mxCell id="c_CashPayment-0" parent="c_CashPayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- receivedBy: string" vertex="1">
-          <mxGeometry height="20" width="230" y="30" as="geometry" />
+          <mxGeometry height="20" width="280" y="30" as="geometry" />
         </mxCell>
         <mxCell id="c_CashPayment-1" parent="c_CashPayment" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="230" y="50" as="geometry" />
+          <mxGeometry height="8" width="280" y="50" as="geometry" />
         </mxCell>
-        <mxCell id="c_CashPayment-2" parent="c_CashPayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ pay(amount: double): bool" vertex="1">
-          <mxGeometry height="20" width="230" y="58" as="geometry" />
-        </mxCell>
-        <mxCell id="c_CashPayment-3" parent="c_CashPayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ refund(amount: double): bool" vertex="1">
-          <mxGeometry height="20" width="230" y="78" as="geometry" />
-        </mxCell>
-        <mxCell id="c_CashPayment-4" parent="c_CashPayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ validate(): bool" vertex="1">
-          <mxGeometry height="20" width="230" y="98" as="geometry" />
+        <mxCell id="c_CashPayment-4" parent="c_CashPayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ CashPayment(receivedBy: string)&lt;br&gt;+ pay(amount: double): bool&lt;br&gt;+ refund(amount: double): bool&lt;br&gt;+ validate(): bool&lt;br&gt;+ getReceivedBy(): string" vertex="1">
+          <mxGeometry height="80" width="280" y="58" as="geometry" />
         </mxCell>
         <mxCell id="c_CheckPayment" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;CheckPayment&lt;/b&gt;" vertex="1">
-          <mxGeometry height="138" width="230" x="500" y="1720" as="geometry" />
+          <mxGeometry height="190" width="210" x="510" y="1720" as="geometry" />
         </mxCell>
         <mxCell id="c_CheckPayment-0" parent="c_CheckPayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- checkNo: string" vertex="1">
-          <mxGeometry height="20" width="230" y="30" as="geometry" />
+          <mxGeometry height="20" width="210" y="30" as="geometry" />
         </mxCell>
         <mxCell id="c_CheckPayment-1" parent="c_CheckPayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- bankName: string" vertex="1">
-          <mxGeometry height="20" width="230" y="50" as="geometry" />
+          <mxGeometry height="20" width="210" y="50" as="geometry" />
         </mxCell>
         <mxCell id="c_CheckPayment-2" parent="c_CheckPayment" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="230" y="70" as="geometry" />
+          <mxGeometry height="8" width="210" y="70" as="geometry" />
         </mxCell>
-        <mxCell id="c_CheckPayment-3" parent="c_CheckPayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ pay(amount: double): bool" vertex="1">
-          <mxGeometry height="20" width="230" y="78" as="geometry" />
-        </mxCell>
-        <mxCell id="c_CheckPayment-4" parent="c_CheckPayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ refund(amount: double): bool" vertex="1">
-          <mxGeometry height="20" width="230" y="98" as="geometry" />
-        </mxCell>
-        <mxCell id="c_CheckPayment-5" parent="c_CheckPayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ validate(): bool" vertex="1">
-          <mxGeometry height="20" width="230" y="118" as="geometry" />
+        <mxCell id="c_CheckPayment-4" parent="c_CheckPayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ CheckPayment(checkNo: string, bankName: string)&amp;nbsp;&lt;br&gt;+ pay(amount: double): bool&lt;br&gt;+ refund(amount: double): bool&lt;br&gt;+ validate(): bool&lt;br&gt;+ getCheckNo(): string&lt;br&gt;+ getBankName(): string&amp;nbsp;" vertex="1">
+          <mxGeometry height="112" width="210" y="78" as="geometry" />
         </mxCell>
         <mxCell id="c_OnlinePayment" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;OnlinePayment&lt;/b&gt;" vertex="1">
-          <mxGeometry height="138" width="230" x="810" y="1720" as="geometry" />
+          <mxGeometry height="200" width="210" x="780" y="1720" as="geometry" />
         </mxCell>
         <mxCell id="c_OnlinePayment-0" parent="c_OnlinePayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- cardHolder: string" vertex="1">
-          <mxGeometry height="20" width="230" y="30" as="geometry" />
+          <mxGeometry height="20" width="210" y="30" as="geometry" />
         </mxCell>
         <mxCell id="c_OnlinePayment-1" parent="c_OnlinePayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- transactionId: string" vertex="1">
-          <mxGeometry height="20" width="230" y="50" as="geometry" />
+          <mxGeometry height="20" width="210" y="50" as="geometry" />
         </mxCell>
         <mxCell id="c_OnlinePayment-2" parent="c_OnlinePayment" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="230" y="70" as="geometry" />
+          <mxGeometry height="8" width="210" y="70" as="geometry" />
         </mxCell>
-        <mxCell id="c_OnlinePayment-3" parent="c_OnlinePayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ pay(amount: double): bool" vertex="1">
-          <mxGeometry height="20" width="230" y="78" as="geometry" />
-        </mxCell>
-        <mxCell id="c_OnlinePayment-4" parent="c_OnlinePayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ refund(amount: double): bool" vertex="1">
-          <mxGeometry height="20" width="230" y="98" as="geometry" />
-        </mxCell>
-        <mxCell id="c_OnlinePayment-5" parent="c_OnlinePayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ validate(): bool" vertex="1">
-          <mxGeometry height="20" width="230" y="118" as="geometry" />
+        <mxCell id="c_OnlinePayment-5" parent="c_OnlinePayment" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ OnlinePayment(cardHolder: string)&amp;nbsp;&lt;br&gt;+ pay(amount: double): bool&lt;br&gt;+ refund(amount: double): bool&lt;br&gt;+ validate(): bool&lt;br&gt;+ getCardHolder(): string&amp;nbsp;&lt;br&gt;+ getTransactionId(): string" vertex="1">
+          <mxGeometry height="122" width="210" y="78" as="geometry" />
         </mxCell>
         <mxCell id="c_ICommunicationStrategy" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;swimlaneFillColor=#ffffff;fontSize=12;" value="«interface»&lt;br&gt;&lt;b&gt;ICommunicationStrategy&lt;/b&gt;" vertex="1">
           <mxGeometry height="100" width="270" x="480" y="1979" as="geometry" />
