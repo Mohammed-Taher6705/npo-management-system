@@ -1,25 +1,28 @@
 package com.npo.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.bson.Document;
+import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
+
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
-import org.bson.Document;
-import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Singleton pattern: one shared MongoDB connection for the whole application.
  * Every model uses DatabaseConnection.getInstance() for its CRUD operations.
  */
-public class DatabaseConnection {
 
-    private static DatabaseConnection instance;      // the single instance
+//Singleton class is final, so nobody can subclass it and create a second instance.
+public final class DatabaseConnection {
+
+    private static volatile DatabaseConnection instance;      // the single instance, volatile so that double-checked locking works correctly
     private final MongoClient client;
     private final MongoDatabase database;
 
@@ -33,7 +36,7 @@ public class DatabaseConnection {
         database = client.getDatabase(dbName);
     }
 
-    public static synchronized DatabaseConnection getInstance() {
+    public static DatabaseConnection getInstance() {
         if (instance == null) {
             instance = new DatabaseConnection();
         }
@@ -82,5 +85,10 @@ public class DatabaseConnection {
 
     private static Bson byId(String id) {
         return Filters.eq("_id", new ObjectId(id));
+    }
+
+    /** Releases the MongoDB connection (call on application shutdown). */
+    public void close() {
+        client.close();
     }
 }
