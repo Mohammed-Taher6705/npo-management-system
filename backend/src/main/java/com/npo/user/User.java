@@ -80,7 +80,7 @@ public abstract class User implements IObserver {
 
     public boolean login(String email, String password) {
         Document doc = DatabaseConnection.getInstance().getCollection("users")
-                .find(new Document("email", email).append("password", password)).first();
+                .find(new Document("email", email).append("password", password).append("role", role)).first();
         if (doc == null) {
             return false;                      
         }
@@ -100,11 +100,14 @@ public abstract class User implements IObserver {
         this.loggedIn = false;
     }
 
-    public void changePassword(String oldPassword, String newPassword) {
+    public boolean changePassword(String oldPassword, String newPassword) {
         if (this.password.equals(oldPassword)) {
             this.password = newPassword;
             edit();
+            return true;
+
         }
+        return false;
     }
 
     public String getName(){
@@ -144,6 +147,22 @@ public abstract class User implements IObserver {
 
     public String getId() {
         return id;
+    }
+
+    public String getPreferredChannel() {
+    return preferredChannel;
+}
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
 }
