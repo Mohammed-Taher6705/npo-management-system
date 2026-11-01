@@ -1,5 +1,10 @@
 package com.npo.user;
-
+import java.util.ArrayList;
+import java.util.List;
+import com.mongodb.client.model.Filters;
+import com.npo.donation.Donation;
+import com.npo.donation.InKindDonation;
+import com.npo.donation.MoneyDonation;
 import org.bson.Document;
 
 import com.npo.common.DatabaseConnection;
@@ -66,4 +71,20 @@ public class Donor extends User {
     public String getDonorType() { return donorType; }
     public double getTotalDonated() { return totalDonated; }
     public void setDonorType(String donorType) { this.donorType = donorType; }
+
+// all donations made by this donor, loaded from the "donations" collection
+public List<Donation> getDonations() {
+    List<Donation> result = new ArrayList<>();
+    for (Document doc : DatabaseConnection.getInstance().select("donations", Filters.eq("donorId", id))) {
+        Donation d;
+        if (doc.getString("type").equals("MONEY")) {
+            d = new MoneyDonation();
+        } else {
+            d = new InKindDonation();
+        }
+        d.read(doc.getObjectId("_id").toHexString());
+        result.add(d);
+    }
+    return result;
+}
 }
