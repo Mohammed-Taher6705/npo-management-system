@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram id="phase1" name="Phase 1 - Class Diagram">
-    <mxGraphModel dx="5975" dy="5379" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3830" pageHeight="4000" background="light-dark(#ffffff, #121212)" math="0" shadow="0">
+    <mxGraphModel dx="4647" dy="4525" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3830" pageHeight="4000" background="light-dark(#ffffff, #121212)" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -271,49 +271,49 @@
           <mxGeometry height="142" width="330" y="30" as="geometry" />
         </mxCell>
         <mxCell id="c_EventController" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;EventController&lt;/b&gt;" vertex="1">
-          <mxGeometry height="324" width="430" x="2490" y="200" as="geometry" />
+          <mxGeometry height="340" width="433" x="2488.5" y="178" as="geometry" />
         </mxCell>
         <mxCell id="c_EventController-2" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ createEvent(data: Map): Map" vertex="1">
-          <mxGeometry height="20" width="430" y="30" as="geometry" />
+          <mxGeometry height="20" width="433" y="30" as="geometry" />
         </mxCell>
         <mxCell id="N9kZeN3Qs87Rl2jX_60X-12" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ listEvents(): List&amp;lt;Map&amp;gt;" vertex="1">
-          <mxGeometry height="20" width="430" y="50" as="geometry" />
+          <mxGeometry height="20" width="433" y="50" as="geometry" />
         </mxCell>
         <mxCell id="c_EventController-3" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ getEvent(id: string): Map" vertex="1">
-          <mxGeometry height="20" width="430" y="70" as="geometry" />
+          <mxGeometry height="20" width="433" y="70" as="geometry" />
         </mxCell>
         <mxCell id="N9kZeN3Qs87Rl2jX_60X-13" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ editEvent(id: string, data: Map): Map" vertex="1">
-          <mxGeometry height="20" width="430" y="90" as="geometry" />
+          <mxGeometry height="20" width="433" y="90" as="geometry" />
         </mxCell>
         <mxCell id="c_EventController-4" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ deleteEvent(id: string): void" vertex="1">
-          <mxGeometry height="20" width="430" y="110" as="geometry" />
+          <mxGeometry height="20" width="433" y="110" as="geometry" />
         </mxCell>
         <mxCell id="c_EventController-5" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ registerAttendee(eventId: string, data: Map): Map" vertex="1">
-          <mxGeometry height="20" width="430" y="130" as="geometry" />
+          <mxGeometry height="20" width="433" y="130" as="geometry" />
         </mxCell>
         <mxCell id="c_EventController-6" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ cancelRegistration(eventId: string, userId: string): Map" vertex="1">
-          <mxGeometry height="20" width="430" y="150" as="geometry" />
+          <mxGeometry height="20" width="433" y="150" as="geometry" />
         </mxCell>
         <mxCell id="c_EventController-7" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ changeStatus(eventId: string, data: Map): Map" vertex="1">
-          <mxGeometry height="20" width="430" y="170" as="geometry" />
+          <mxGeometry height="20" width="433" y="170" as="geometry" />
         </mxCell>
         <mxCell id="c_EventController-8" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ listAttendees(eventId: string): List&amp;lt;Map&amp;gt;" vertex="1">
-          <mxGeometry height="20" width="430" y="190" as="geometry" />
+          <mxGeometry height="20" width="433" y="190" as="geometry" />
         </mxCell>
         <mxCell id="N9kZeN3Qs87Rl2jX_60X-14" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- buildTicket(data: Map): ITicket" vertex="1">
-          <mxGeometry height="20" width="430" y="210" as="geometry" />
+          <mxGeometry height="20" width="433" y="210" as="geometry" />
         </mxCell>
         <mxCell id="N9kZeN3Qs87Rl2jX_60X-15" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- loadEvent(id: string): Event" vertex="1">
-          <mxGeometry height="20" width="430" y="230" as="geometry" />
+          <mxGeometry height="20" width="433" y="230" as="geometry" />
         </mxCell>
         <mxCell id="q9iGqBGL9ZMPdnbSKDOB-14" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- registrationsOf&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;(e: Event): List&amp;lt;Map&amp;gt;&lt;/span&gt;" vertex="1">
-          <mxGeometry height="20" width="430" y="250" as="geometry" />
+          <mxGeometry height="20" width="433" y="250" as="geometry" />
         </mxCell>
         <mxCell id="q9iGqBGL9ZMPdnbSKDOB-8" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- toResponse(e: Event): Map" vertex="1">
-          <mxGeometry height="20" width="430" y="270" as="geometry" />
+          <mxGeometry height="20" width="433" y="270" as="geometry" />
         </mxCell>
-        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-12" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- loadUser(id: string): User&lt;div&gt;+ leaveWaitingList(id: string, userId: string): Map&lt;/div&gt;" vertex="1">
-          <mxGeometry height="34" width="430" y="290" as="geometry" />
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-12" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- loadUser(id: string): User&lt;div&gt;+ leaveWaitingList(id: string, userId: string): Map&lt;/div&gt;&lt;div&gt;+markAttended(id:string,userId: string):Map&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="433" y="290" as="geometry" />
         </mxCell>
         <mxCell id="c_VolunteerController" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;VolunteerController&lt;/b&gt;" vertex="1">
           <mxGeometry height="355" width="427" x="3000" y="414" as="geometry" />
@@ -481,46 +481,46 @@
           <mxGeometry height="212" width="290" y="78" as="geometry" />
         </mxCell>
         <mxCell id="c_Volunteer" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;Volunteer&lt;/b&gt;" vertex="1">
-          <mxGeometry height="328" width="260" x="2190" y="1420" as="geometry" />
+          <mxGeometry height="314" width="256" x="2190" y="1420" as="geometry" />
         </mxCell>
         <mxCell id="c_Volunteer-0" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- skills: List&amp;lt;Skill&amp;gt;" vertex="1">
-          <mxGeometry height="20" width="260" y="30" as="geometry" />
+          <mxGeometry height="20" width="256" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="c_Volunteer-1" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- availability: string" vertex="1">
-          <mxGeometry height="20" width="260" y="50" as="geometry" />
+        <mxCell id="c_Volunteer-1" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- availability: string&lt;div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="256" y="50" as="geometry" />
         </mxCell>
         <mxCell id="c_Volunteer-2" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- totalHours: double" vertex="1">
-          <mxGeometry height="20" width="260" y="70" as="geometry" />
+          <mxGeometry height="20" width="256" y="70" as="geometry" />
         </mxCell>
         <mxCell id="c_Volunteer-3" parent="c_Volunteer" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="260" y="90" as="geometry" />
+          <mxGeometry height="8" width="256" y="90" as="geometry" />
         </mxCell>
         <mxCell id="c_Volunteer-4" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ addSkill(s: Skill): void" vertex="1">
-          <mxGeometry height="20" width="260" y="98" as="geometry" />
+          <mxGeometry height="20" width="256" y="98" as="geometry" />
         </mxCell>
         <mxCell id="c_Volunteer-5" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ removeSkill(s: Skill): void" vertex="1">
-          <mxGeometry height="20" width="260" y="118" as="geometry" />
+          <mxGeometry height="20" width="256" y="118" as="geometry" />
         </mxCell>
         <mxCell id="c_Volunteer-6" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ setAvailability(a: string): void" vertex="1">
-          <mxGeometry height="20" width="260" y="138" as="geometry" />
+          <mxGeometry height="20" width="256" y="138" as="geometry" />
         </mxCell>
         <mxCell id="c_Volunteer-7" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ getHours(): double" vertex="1">
-          <mxGeometry height="20" width="260" y="158" as="geometry" />
+          <mxGeometry height="20" width="256" y="158" as="geometry" />
         </mxCell>
         <mxCell id="CGyDe_sJBHAZSBF8VBPh-1" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ addHours(h: double): void" vertex="1">
-          <mxGeometry height="20" width="260" y="178" as="geometry" />
+          <mxGeometry height="20" width="256" y="178" as="geometry" />
         </mxCell>
         <mxCell id="CGyDe_sJBHAZSBF8VBPh-2" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ getSkills(): List&amp;lt;skill&amp;gt;" vertex="1">
-          <mxGeometry height="20" width="260" y="198" as="geometry" />
+          <mxGeometry height="20" width="256" y="198" as="geometry" />
         </mxCell>
         <mxCell id="CGyDe_sJBHAZSBF8VBPh-3" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ getAvailability(): String" vertex="1">
-          <mxGeometry height="20" width="260" y="218" as="geometry" />
+          <mxGeometry height="20" width="256" y="218" as="geometry" />
         </mxCell>
-        <mxCell id="CGyDe_sJBHAZSBF8VBPh-4" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- saveVolunteerFields(): void&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;- unavailableDates: List&amp;lt;Date&amp;gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ addUnavailableDate(d: Date)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ removeUnavailableDate(d: Date)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ isAvailableOn(d: Date): bool&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ getUnavailableDates(): List&amp;lt;Date&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="90" width="260" y="238" as="geometry" />
+        <mxCell id="CGyDe_sJBHAZSBF8VBPh-4" parent="c_Volunteer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- saveVolunteerFields(): void&lt;div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ addUnavailableDate(d: Date):void&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ removeUnavailableDate(d: Date):void&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ isAvailableOn(d: Date): bool&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ getUnavailableDates(): List&amp;lt;Date&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="76" width="256" y="238" as="geometry" />
         </mxCell>
         <mxCell id="c_Beneficiary" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;Beneficiary&lt;/b&gt;" vertex="1">
-          <mxGeometry height="258" width="210" x="1750" y="1390" as="geometry" />
+          <mxGeometry height="258" width="210" x="1748" y="1404" as="geometry" />
         </mxCell>
         <mxCell id="c_Beneficiary-0" parent="c_Beneficiary" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- address: string" vertex="1">
           <mxGeometry height="20" width="210" y="30" as="geometry" />
@@ -669,7 +669,7 @@
         <mxCell id="V6i3uL9aUy90VZKQpJR--4" parent="c_Event" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ setLocation(location: string): void" vertex="1">
           <mxGeometry height="20" width="280" y="709" as="geometry" />
         </mxCell>
-        <mxCell id="V6i3uL9aUy90VZKQpJR--6" parent="c_Event" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ setCapacity(capacity: int): void&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ isFull(): &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;bool&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;joinWaitingList(u: &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;User, &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;t: &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;ITicket): &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;bool&lt;/span&gt;&lt;div&gt;&lt;code style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ leaveWaitingList(u: User)&lt;/code&gt;&lt;/div&gt;&lt;div&gt;&lt;code style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ getWaitingList(): List&amp;lt;User&amp;gt;&lt;/code&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;- promoteFromWaitingList()&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;- isRegistered(u: User): bool&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;- isWaiting(u: User): bool&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="V6i3uL9aUy90VZKQpJR--6" parent="c_Event" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ setCapacity(capacity: int): void&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ isFull(): &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;bool&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;joinWaitingList(u: &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;User, &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;t: &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;ITicket): &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;bool&lt;/span&gt;&lt;div&gt;&lt;code style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ leaveWaitingList(u: User):void&lt;/code&gt;&lt;/div&gt;&lt;div&gt;&lt;code style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ getWaitingList(): List&amp;lt;User&amp;gt;&lt;/code&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;- promoteFromWaitingList():void&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;- isRegistered(u: User): bool&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;- isWaiting(u: User): bool&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="105" width="280" y="729" as="geometry" />
         </mxCell>
         <mxCell id="c_VolunteerTask" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;VolunteerTask&lt;/b&gt;" vertex="1">
@@ -752,8 +752,19 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="2pUVxIDcZ2ivtog4IWUU-9" edge="1" parent="1" source="c_Need" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;endArrow=open;endFill=0;exitX=0.988;exitY=0.005;exitDx=0;exitDy=0;exitPerimeter=0;">
+          <mxGeometry relative="1" x="0.0517" as="geometry">
+            <Array as="points">
+              <mxPoint x="2020.6" y="1762" />
+              <mxPoint x="2020.6" y="1031.8" />
+              <mxPoint x="2190" y="1031.8" />
+            </Array>
+            <mxPoint x="2020.6" y="1760" as="sourcePoint" />
+            <mxPoint x="2189.9999999999995" y="960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="c_Need" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;Need&lt;/b&gt;" vertex="1">
-          <mxGeometry height="402" width="295" x="1700" y="1760" as="geometry" />
+          <mxGeometry height="386" width="295" x="1700" y="1760" as="geometry" />
         </mxCell>
         <mxCell id="c_Need-2" parent="c_Need" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="&lt;div&gt;- id: string&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;- category: NeedCategory&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;- priority: string&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;- status: string&amp;nbsp;&amp;nbsp;&lt;/div&gt;" vertex="1">
           <mxGeometry height="68" width="295" y="30" as="geometry" />
@@ -761,8 +772,8 @@
         <mxCell id="c_Need-3" parent="c_Need" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
           <mxGeometry height="8" width="295" y="98" as="geometry" />
         </mxCell>
-        <mxCell id="c_Need-6" parent="c_Need" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="&lt;div&gt;+ Need()&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/div&gt;&lt;div&gt;+ Need(category: NeedCategory, priority: string)&amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/div&gt;&lt;div&gt;+ create(): void&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/div&gt;&lt;div&gt;+ read(id: string): Need&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/div&gt;&lt;div&gt;+ edit(): void&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/div&gt;&lt;div&gt;+ delete(): void&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/div&gt;&lt;div&gt;+ getId(): string&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;+ getCategory(): NeedCategory&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;+ getPriority(): string&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;+ getStatus(): string&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;+ setPriority(priority: string): void&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;+ setStatus(status: string): void&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;- observers: &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;List&amp;lt;IObserver&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;- &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;alertMessage: &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;string&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;isUrgent(): &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;bool&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;announceUrgent(b: &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;Beneficiary)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;+ attach(o: IObserver): void&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;+ detach(o: IObserver): void&lt;/div&gt;&lt;div&gt;+ notifyObservers(): void&lt;/div&gt;&lt;div&gt;+ getUpdateMessage(): String&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="296" width="295" y="106" as="geometry" />
+        <mxCell id="c_Need-6" parent="c_Need" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="&lt;div&gt;+ Need()&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/div&gt;&lt;div&gt;+ Need(category: NeedCategory, priority: string)&amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/div&gt;&lt;div&gt;+ create(): void&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/div&gt;&lt;div&gt;+ read(id: string): Need&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/div&gt;&lt;div&gt;+ edit(): void&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/div&gt;&lt;div&gt;+ delete(): void&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&lt;/div&gt;&lt;div&gt;+ getId(): string&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;+ getCategory(): NeedCategory&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;+ getPriority(): string&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;+ getStatus(): string&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;+ setPriority(priority: string): void&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;+ setStatus(status: string): void&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;- observers: &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;List&amp;lt;IObserver&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;isUrgent(): &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;bool&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;+ &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;announceUrgent(b: &lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;Beneficiary):void&lt;/span&gt;&lt;/div&gt;&lt;div&gt;+ attach(o: IObserver): void&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;+ detach(o: IObserver): void&lt;/div&gt;&lt;div&gt;+ notifyObservers(): void&lt;/div&gt;&lt;div&gt;+ getUpdateMessage(): String&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="280" width="295" y="106" as="geometry" />
         </mxCell>
         <mxCell id="c_IPaymentMethod" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;swimlaneFillColor=#ffffff;fontSize=12;" value="«interface»&lt;br&gt;&lt;b&gt;IPaymentMethod&lt;/b&gt;" vertex="1">
           <mxGeometry height="100" width="230" x="-300" y="1720" as="geometry" />
@@ -920,8 +931,8 @@
         <mxCell id="nBsvneBRugp8WsR9HEJe-1" edge="1" parent="1" source="c_Donation" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;dashed=1;endArrow=block;endFill=0;" target="c_ISubject">
           <mxGeometry relative="1" x="0.2074" as="geometry">
             <Array as="points">
-              <mxPoint x="640" y="800" />
-              <mxPoint x="1950" y="800" />
+              <mxPoint x="640" y="790.1" />
+              <mxPoint x="1950" y="790.1" />
               <mxPoint x="1950" y="1080" />
             </Array>
           </mxGeometry>
@@ -1121,11 +1132,11 @@
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e13" edge="1" parent="1" source="c_BeneficiaryController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=open;endFill=0;endSize=10;exitX=0;exitY=0.858586;entryX=1;entryY=0.5;startArrow=diamond;startFill=0;startSize=16;" target="c_Beneficiary" value="">
-          <mxGeometry relative="1" x="-0.3064" as="geometry">
+        <mxCell id="e13" edge="1" parent="1" source="c_BeneficiaryController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=open;endFill=0;endSize=10;exitX=0;exitY=0.858586;entryX=1;entryY=0.069;startArrow=diamond;startFill=0;startSize=16;entryDx=0;entryDy=0;entryPerimeter=0;" target="c_Beneficiary" value="">
+          <mxGeometry relative="1" x="-0.2054" as="geometry">
             <Array as="points">
               <mxPoint x="2000" y="796.2" />
-              <mxPoint x="2000" y="1519" />
+              <mxPoint x="2000" y="1421.8" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -1169,12 +1180,8 @@
         <mxCell id="e21" edge="1" parent="1" source="c_Volunteer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=block;endFill=0;endSize=14;exitX=0.076923;exitY=0;entryX=1;entryY=0.7115;" target="c_User" value="">
           <mxGeometry relative="1" x="-0.1509" as="geometry" />
         </mxCell>
-        <mxCell id="e22" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=block;endFill=0;endSize=14;exitX=0.5;exitY=0;entryX=0.866;entryY=1;" target="c_User" value="">
-          <mxGeometry relative="1" x="0.6549" as="geometry">
-            <Array as="points">
-              <mxPoint x="1854" y="1390.6" />
-              <mxPoint x="1854.1" y="1390.6" />
-            </Array>
+        <mxCell id="e22" edge="1" parent="1" source="c_Beneficiary" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=block;endFill=0;endSize=14;exitX=0.515;exitY=-0.001;entryX=0.866;entryY=1;exitDx=0;exitDy=0;exitPerimeter=0;" target="c_User" value="">
+          <mxGeometry relative="1" x="0.5996" as="geometry">
             <mxPoint x="1854" y="1373" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
@@ -1213,13 +1220,13 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e28" edge="1" parent="1" source="c_VolunteerTask" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=open;endFill=0;endSize=10;exitX=0;exitY=0;exitDx=0;exitDy=0;" value="">
-          <mxGeometry relative="1" x="0.0829" as="geometry">
+        <mxCell id="e28" edge="1" parent="1" source="c_VolunteerTask" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=open;endFill=0;endSize=10;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1.004;entryY=0.145;entryDx=0;entryDy=0;entryPerimeter=0;" target="c_IObserver" value="">
+          <mxGeometry relative="1" x="0.0765" as="geometry">
             <Array as="points">
               <mxPoint x="2914.7" y="900" />
               <mxPoint x="2914.7" y="548" />
               <mxPoint x="2476.9" y="548" />
-              <mxPoint x="2476.9" y="900" />
+              <mxPoint x="2476.9" y="908.7" />
             </Array>
             <mxPoint x="2350.24" y="900" as="targetPoint" />
           </mxGeometry>
@@ -1293,9 +1300,9 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="e41" edge="1" parent="1" source="c_Beneficiary" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=open;endFill=0;endSize=10;exitX=0.095238;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="c_Need" value="">
-          <mxGeometry relative="1" x="0.7444" as="geometry">
+          <mxGeometry relative="1" x="0.6763" as="geometry">
             <Array as="points">
-              <mxPoint x="1772.5" y="1648" />
+              <mxPoint x="1772.5" y="1662" />
               <mxPoint x="1772.5" y="1753.8" />
               <mxPoint x="1773.8" y="1753.8" />
             </Array>
@@ -1502,7 +1509,7 @@
           <mxGeometry height="30" width="120" x="2240" y="430" as="geometry" />
         </mxCell>
         <mxCell id="EMOziM6qCaAWbzN1AA3k-19" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="«HTTP / JSON»" vertex="1">
-          <mxGeometry height="30" width="120" x="2705" y="148" as="geometry" />
+          <mxGeometry height="30" width="120" x="2695" y="141" as="geometry" />
         </mxCell>
         <mxCell id="EMOziM6qCaAWbzN1AA3k-20" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="«HTTP / JSON»" vertex="1">
           <mxGeometry height="30" width="120" x="3221" y="376" as="geometry" />
@@ -2260,8 +2267,8 @@
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="300" y="2790" />
-              <mxPoint x="420" y="2790" />
-              <mxPoint x="420" y="1380" />
+              <mxPoint x="388.7" y="2790" />
+              <mxPoint x="388.7" y="1380" />
               <mxPoint x="470" y="1380" />
             </Array>
           </mxGeometry>
