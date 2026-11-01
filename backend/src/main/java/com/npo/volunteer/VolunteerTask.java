@@ -71,12 +71,16 @@ public class VolunteerTask implements ISubject {
     }
 
     // ----- assignments -----
-    public void assignVolunteer(Volunteer v) {
+    public boolean assignVolunteer(Volunteer v) {
+        if (!v.isAvailableOn(date)) {
+            return false;
+        }
         assignees.add(v);
         attach(v);
         edit();
         lastChange = "You were assigned to task '" + title + "' on " + date + " at " + location;
-        v.update(this);                   // tell only the new volunteer
+        v.update(this);
+        return true;
     }
 
     public void removeVolunteer(Volunteer v) {

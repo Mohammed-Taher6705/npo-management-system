@@ -7,6 +7,9 @@ import com.npo.lookup.Skill;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Date;
+
+
 public class Volunteer extends User {
     private List<Skill> skills = new ArrayList<>();
     private String availability;
@@ -66,7 +69,8 @@ public class Volunteer extends User {
         }
         Document data = new Document("availability", availability)
                 .append("totalHours", totalHours)
-                .append("skillIds", skillIds);
+                .append("skillIds", skillIds)
+                .append("unavailableDates", unavailableDates);
         DatabaseConnection.getInstance().update("users", id, data);
     }
 
@@ -91,6 +95,12 @@ public class Volunteer extends User {
         availability = doc.getString("availability");
         totalHours = doc.getDouble("totalHours");
 
+        unavailableDates = new ArrayList<>();
+        List<Date> saved = doc.getList("unavailableDates", Date.class);
+        if (saved != null) {
+            unavailableDates.addAll(saved);
+        }
+
         skills = new ArrayList<>();
         List<String> skillIds = doc.getList("skillIds", String.class);
         for (String skillId : skillIds) {
@@ -109,6 +119,39 @@ public class Volunteer extends User {
         read(id);
         return true;
     }
+
+    private List<Date> unavailableDates = new ArrayList<>();
+
+    public void addUnavailableDate(Date d) {
+        if (isAvailableOn(d)) {
+            unavailableDates.add(d);
+            edit();
+        }
+    }
+
+    public void removeUnavailableDate(Date d) {
+    for (int i = 0; i < unavailableDates.size(); i++) {
+        if (unavailableDates.get(i).equals(d)) {
+            unavailableDates.remove(i);
+            break;
+        }
+    }
+        edit();
+    }
+
+    public boolean isAvailableOn(Date d) {
+    for (Date u : unavailableDates) {
+        if (u.equals(d)) {
+            return false;
+        }
+    }
+     return true;
+    }
+
+    public List<Date> getUnavailableDates() {
+        return unavailableDates;
+    }
+
 
 
 

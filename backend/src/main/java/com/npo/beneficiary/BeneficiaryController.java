@@ -116,9 +116,13 @@ public class BeneficiaryController {
         if (!status.equals("OPEN") && !status.equals("FULFILLED")) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Status must be OPEN or FULFILLED");
         }
+        boolean wasUrgent = n.isUrgent();
         n.setPriority(priority(data));
         n.setStatus(status);
         n.edit();
+        if (!wasUrgent && n.isUrgent()) {
+            n.announceUrgent(b);
+        }
         return toResponse(loadBeneficiary(id));
     }
 

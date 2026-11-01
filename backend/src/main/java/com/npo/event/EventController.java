@@ -98,9 +98,18 @@ public class EventController {
         Event e = loadEvent(id);
         User user = loadUser(text(data, "userId"));
         ITicket ticket = buildTicket(data);                       // Decorator
+
+        if (e.isFull()) {                                         // client requirement: waiting list
+            if (!e.joinWaitingList(user, ticket)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "Event is full and the user is already registered or waiting");
+            }
+            return toResponse(e);
+        }
+
         if (!e.register(user, ticket)) {                          // Observer: attendee is attached + notified
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Registration refused: event is full, not upcoming, or user already registered");
+                    "Registration refused: event not upcoming, or user already registered");
         }
         return toResponse(e);
     }
@@ -187,6 +196,14 @@ public class EventController {
         out.put("capacity", e.getCapacity());
         out.put("status", e.getStatus());
         out.put("registrations", registrationsOf(e));
+        List<Map<String, Object>> waiting = new ArrayList<>();
+        for (User u : e.getWaitingList()) {
+            Map<String, Object> w = new LinkedHashMap<>();
+            w.put("userId", u.getId());
+            w.put("name", u.getName());
+            waiting.add(w);
+        }
+        out.put("waitingList", waiting);
         return out;
     }
 
@@ -229,4 +246,23 @@ public class EventController {
     public String badInput(RuntimeException e) {
         return "Invalid input: " + e.getMessage();
     }
+
+    @DeleteMapping("/{id}/waitlist/{userId}")
+    public Map<String, Object> leaveWaitingList(@PathVariable String id, @PathVariable String userId) {
+        Event e = loadEvent(id);
+        e.leaveWaitingList(loadUser(userId));
+        return toResponse(e);
+    }
+
+    @PutMapping("/{id}/attend/{userId}")
+   public Map<String, Object> markAttended(@PathVariable String id, @PathVariable String userId) {
+       Event e = loadEvent(id);
+       for (Registration r : e.getRegistrations()) {
+           if (r.getAttendee().getId().equals(userId)) {
+               r.markAttended();
+           }
+       }
+       e.edit();
+       return toResponse(e);
+   }
 }
