@@ -91,8 +91,10 @@ public class VolunteerController {
         if (isAssigned(t, v.getId())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Volunteer already assigned to this task");
         }
-        t.assignVolunteer(v);                      // Observer: volunteer is attached + notified
-        return toResponse(t);
+        if (!t.assignVolunteer(v)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Volunteer is unavailable on the task's date");
+        }
+            return toResponse(t);
     }
 
     // DELETE /api/tasks/{id}/assign/{volunteerId}
@@ -232,5 +234,26 @@ public class VolunteerController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String badInput(RuntimeException e) {
         return "Invalid input: " + e.getMessage();
+    }
+
+    // POST /api/tasks/unavailable/{volunteerId}   body: { "date": "2026-12-01" }
+    @PostMapping("/unavailable/{volunteerId}")
+    public List<Date> addUnavailableDate(@PathVariable String volunteerId, @RequestBody Map<String, Object> data) {
+        Volunteer v = loadVolunteer(volunteerId);
+        v.addUnavailableDate(date(data, "date"));
+        return v.getUnavailableDates();
+    }
+
+    // DELETE /api/tasks/unavailable/{volunteerId}/2026-12-01
+    @DeleteMapping("/unavailable/{volunteerId}/{date}")
+    public List<Date> removeUnavailableDate(@PathVariable String volunteerId, @PathVariable String date) {
+        Volunteer v = loadVolunteer(volunteerId);
+        v.removeUnavailableDate(date(Map.of("date", date), "date"));
+        return v.getUnavailableDates();
+    }
+
+    @GetMapping("/unavailable/{volunteerId}")
+    public List<Date> listUnavailableDates(@PathVariable String volunteerId) {
+        return loadVolunteer(volunteerId).getUnavailableDates();
     }
 }

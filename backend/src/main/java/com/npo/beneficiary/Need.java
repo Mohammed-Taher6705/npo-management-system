@@ -1,15 +1,25 @@
 package com.npo.beneficiary;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bson.Document;
 
+import com.mongodb.client.model.Filters;
 import com.npo.common.DatabaseConnection;
+import com.npo.common.IObserver;
+import com.npo.common.ISubject;
 import com.npo.lookup.NeedCategory;
+import com.npo.user.Admin;
+import com.npo.user.Beneficiary;
 
-public class Need {
+public class Need implements ISubject {
     private String id;
     private NeedCategory category;     // e.g. Food, Medical, Shelter (lookup table)
     private String priority;           // "LOW", "MEDIUM", "HIGH"
     private String status;             // "OPEN", "FULFILLED"
+    private List<IObserver> observers = new ArrayList<>();
+    private String alertMessage = "";
 
     public Need() {
     }
@@ -52,6 +62,45 @@ public class Need {
 
     public void delete() {
         DatabaseConnection.getInstance().delete("needs", id);
+    }
+
+    // ----- client requirement: urgent-need alert -----
+    public boolean isUrgent() {
+        return "HIGH".equals(priority);
+    }
+
+    public void announceUrgent(Beneficiary b) {
+        alertMessage = "URGENT: " + b.getName() + " needs " + category.getName() + " (HIGH priority)";
+        observers = new ArrayList<>();
+        for (Document doc : DatabaseConnection.getInstance().select("users", Filters.eq("role", "ADMIN"))) {
+            Admin admin = new Admin();
+            admin.read(doc.getObjectId("_id").toHexString());
+            attach(admin);
+        }
+        notifyObservers();
+    }
+
+    // ----- Observer pattern (ISubject) -----
+    @Override
+    public void attach(IObserver o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void detach(IObserver o) {
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (IObserver o : observers) {
+            o.update(this);
+        }
+    }
+
+    @Override
+    public String getUpdateMessage() {
+        return alertMessage;
     }
 
     // ----- getters / setters (from the diagram) -----

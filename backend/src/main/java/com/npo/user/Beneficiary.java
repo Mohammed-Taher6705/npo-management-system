@@ -25,6 +25,9 @@ public class Beneficiary extends User{
     public void addNeed(Need n) {
         needs.add(n);
         edit();
+        if (n.isUrgent()) {
+            n.announceUrgent(this);
+        }
     }
 
     public void removeNeed(Need n) {
@@ -107,4 +110,5 @@ public class Beneficiary extends User{
         read(id);
         return true;
     }
+
 }
