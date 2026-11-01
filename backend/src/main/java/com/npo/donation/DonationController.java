@@ -73,7 +73,6 @@ public class DonationController {
         Donation donation = creator.registerDonation(donor);
 
         if (donation instanceof MoneyDonation) {                     // Strategy
-            
             if (payment != null) {                                   // null = pay later
                 MoneyDonation money = (MoneyDonation) donation;
                 money.setPaymentMethod(payment);
