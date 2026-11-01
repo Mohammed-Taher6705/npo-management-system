@@ -68,11 +68,12 @@ public class DonationController {
     @ResponseStatus(HttpStatus.CREATED)
     public Map<String, Object> donate(@RequestBody Map<String, Object> data) {
         Donor donor = loadDonor(text(data, "donorId"));
-        DonationCreator creator = creatorFor(data);                 // Factory Method
+        DonationCreator creator = creatorFor(data);
+        IPaymentMethod payment = paymentFor(data);             // Factory Method
         Donation donation = creator.registerDonation(donor);
 
         if (donation instanceof MoneyDonation) {                     // Strategy
-            IPaymentMethod payment = paymentFor(data);
+            
             if (payment != null) {                                   // null = pay later
                 MoneyDonation money = (MoneyDonation) donation;
                 money.setPaymentMethod(payment);
