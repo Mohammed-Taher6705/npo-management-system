@@ -54,6 +54,7 @@ public class MoneyDonation extends Donation {
         if (paymentMethod.pay(amount)) {
             status = "COMPLETED";
             donor.addToTotal(amount);          // count it only when the money is actually paid
+            announceReceived();
         } else {
             status = "FAILED";
         }

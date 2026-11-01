@@ -35,6 +35,7 @@ public void create() {
     DatabaseConnection.getInstance().update("donations", id, data);
 
     donor.addToTotal(estimatedValue);     // items count as soon as they are received
+    announceReceived();
 }
 
     @Override
