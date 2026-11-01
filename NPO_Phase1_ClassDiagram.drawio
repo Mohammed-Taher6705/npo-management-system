@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram id="phase1" name="Phase 1 - Class Diagram">
-    <mxGraphModel dx="5028" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3830" pageHeight="2658" background="light-dark(#ffffff, #121212)" math="0" shadow="0">
+    <mxGraphModel dx="5568" dy="1305" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3830" pageHeight="2658" background="light-dark(#ffffff, #121212)" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -227,34 +227,49 @@
           <mxGeometry height="20" width="410" y="250" as="geometry" />
         </mxCell>
         <mxCell id="c_BeneficiaryController" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;BeneficiaryController&lt;/b&gt;" vertex="1">
-          <mxGeometry height="198" width="320" x="2090" y="560" as="geometry" />
+          <mxGeometry height="310" width="320" x="2090" y="530" as="geometry" />
         </mxCell>
-        <mxCell id="c_BeneficiaryController-0" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- view: BeneficiaryView" vertex="1">
+        <mxCell id="c_BeneficiaryController-2" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ addBeneficiary(data: Map): Map" vertex="1">
           <mxGeometry height="20" width="320" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="c_BeneficiaryController-1" parent="c_BeneficiaryController" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="320" y="50" as="geometry" />
+        <mxCell id="c_BeneficiaryController-3" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ listBeneficiaries(): List&amp;lt;Map&amp;gt;" vertex="1">
+          <mxGeometry height="20" width="320" y="50" as="geometry" />
         </mxCell>
-        <mxCell id="c_BeneficiaryController-2" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ addBeneficiary(data: Map): void" vertex="1">
-          <mxGeometry height="20" width="320" y="58" as="geometry" />
+        <mxCell id="c_BeneficiaryController-4" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ viewBeneficiary(id: string): Map" vertex="1">
+          <mxGeometry height="20" width="320" y="70" as="geometry" />
         </mxCell>
-        <mxCell id="c_BeneficiaryController-3" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ viewBeneficiary(id: int): void" vertex="1">
-          <mxGeometry height="20" width="320" y="78" as="geometry" />
+        <mxCell id="c_BeneficiaryController-5" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ editBeneficiary(id: string,data: Map): Map" vertex="1">
+          <mxGeometry height="20" width="320" y="90" as="geometry" />
         </mxCell>
-        <mxCell id="c_BeneficiaryController-4" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ editBeneficiary(id: int, data: Map): void" vertex="1">
-          <mxGeometry height="20" width="320" y="98" as="geometry" />
+        <mxCell id="c_BeneficiaryController-6" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ deleteBeneficiary(id: string): void" vertex="1">
+          <mxGeometry height="20" width="320" y="110" as="geometry" />
         </mxCell>
-        <mxCell id="c_BeneficiaryController-5" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ deleteBeneficiary(id: int): void" vertex="1">
-          <mxGeometry height="20" width="320" y="118" as="geometry" />
+        <mxCell id="c_BeneficiaryController-7" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ addNeed(id: string, data: Map): Map" vertex="1">
+          <mxGeometry height="20" width="320" y="130" as="geometry" />
         </mxCell>
-        <mxCell id="c_BeneficiaryController-6" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ addNeed(benId: int, n: Need): void" vertex="1">
-          <mxGeometry height="20" width="320" y="138" as="geometry" />
+        <mxCell id="c_BeneficiaryController-8" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ updateNeed(id: string, needId: string, data: Map): Map" vertex="1">
+          <mxGeometry height="20" width="320" y="150" as="geometry" />
         </mxCell>
-        <mxCell id="c_BeneficiaryController-7" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ removeNeed(benId: int, n: Need): void" vertex="1">
-          <mxGeometry height="20" width="320" y="158" as="geometry" />
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-15" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ removeNeed(id: string, needId: string): Map" vertex="1">
+          <mxGeometry height="20" width="320" y="170" as="geometry" />
         </mxCell>
-        <mxCell id="c_BeneficiaryController-8" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ listNeeds(benId: int): void" vertex="1">
-          <mxGeometry height="20" width="320" y="178" as="geometry" />
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-16" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ listNeeds(id: string): List&amp;lt;Map&amp;gt;" vertex="1">
+          <mxGeometry height="20" width="320" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-17" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- loadBeneficiary(id: string): Beneficiary" vertex="1">
+          <mxGeometry height="20" width="320" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-19" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value=" - findNeed(b: Beneficiary, needId: string): Need " vertex="1">
+          <mxGeometry height="20" width="320" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-21" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- priority(data: Map): string" vertex="1">
+          <mxGeometry height="20" width="320" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-20" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- toResponse(b: Beneficiary): Map" vertex="1">
+          <mxGeometry height="20" width="320" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-18" parent="c_BeneficiaryController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- needsOf(b: Beneficiary): List&amp;lt;Map&amp;gt;" vertex="1">
+          <mxGeometry height="20" width="320" y="290" as="geometry" />
         </mxCell>
         <mxCell id="c_LookupController" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;LookupController&lt;/b&gt;" vertex="1">
           <mxGeometry height="162" width="330" x="840" y="560" as="geometry" />
@@ -263,7 +278,7 @@
           <mxGeometry height="132" width="330" y="30" as="geometry" />
         </mxCell>
         <mxCell id="c_EventController" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;EventController&lt;/b&gt;" vertex="1">
-          <mxGeometry height="270" width="430" x="2480" y="420" as="geometry" />
+          <mxGeometry height="330" width="430" x="2480" y="420" as="geometry" />
         </mxCell>
         <mxCell id="c_EventController-2" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ createEvent(data: Map): Map" vertex="1">
           <mxGeometry height="20" width="430" y="30" as="geometry" />
@@ -298,38 +313,56 @@
         <mxCell id="N9kZeN3Qs87Rl2jX_60X-15" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- loadEvent(id: string): Event" vertex="1">
           <mxGeometry height="20" width="430" y="230" as="geometry" />
         </mxCell>
-        <mxCell id="N9kZeN3Qs87Rl2jX_60X-16" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- toResponse(e: Event): Map" vertex="1">
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-14" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- registrationOf&lt;span style=&quot;background-color: transparent; color: light-dark(#000000, var(--ge-light-color, #ffffff));&quot;&gt;(e: Event): List&amp;lt;Map&amp;gt;&lt;/span&gt;" vertex="1">
           <mxGeometry height="20" width="430" y="250" as="geometry" />
         </mxCell>
-        <mxCell id="c_VolunteerController" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;VolunteerController&lt;/b&gt;" vertex="1">
-          <mxGeometry height="198" width="430" x="3000" y="560" as="geometry" />
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-8" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- toResponse(e: Event): Map" vertex="1">
+          <mxGeometry height="20" width="430" y="270" as="geometry" />
         </mxCell>
-        <mxCell id="c_VolunteerController-0" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- view: VolunteerView" vertex="1">
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-12" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- loadUser(id: string): User" vertex="1">
+          <mxGeometry height="20" width="430" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="N9kZeN3Qs87Rl2jX_60X-16" parent="c_EventController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- toResponse(e: Event): Map" vertex="1">
+          <mxGeometry height="20" width="430" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="c_VolunteerController" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;swimlaneFillColor=#ffffff;fontSize=12;" value="&lt;b&gt;VolunteerController&lt;/b&gt;" vertex="1">
+          <mxGeometry height="270" width="430" x="3000" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="c_VolunteerController-2" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ createTask(data: Map): Map" vertex="1">
           <mxGeometry height="20" width="430" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="c_VolunteerController-1" parent="c_VolunteerController" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
-          <mxGeometry height="8" width="430" y="50" as="geometry" />
+        <mxCell id="c_VolunteerController-3" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ listTask(): List&amp;lt;Map&amp;gt;" vertex="1">
+          <mxGeometry height="20" width="430" y="50" as="geometry" />
         </mxCell>
-        <mxCell id="c_VolunteerController-2" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ createTask(data: Map): void" vertex="1">
-          <mxGeometry height="20" width="430" y="58" as="geometry" />
+        <mxCell id="c_VolunteerController-4" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ getTask(id: string): map" vertex="1">
+          <mxGeometry height="20" width="430" y="70" as="geometry" />
         </mxCell>
-        <mxCell id="c_VolunteerController-3" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ editTask(id: int, data: Map): void" vertex="1">
-          <mxGeometry height="20" width="430" y="78" as="geometry" />
+        <mxCell id="c_VolunteerController-5" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ editTask(id: string, dats: Map): Map" vertex="1">
+          <mxGeometry height="20" width="430" y="90" as="geometry" />
         </mxCell>
-        <mxCell id="c_VolunteerController-4" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ deleteTask(id: int): void" vertex="1">
-          <mxGeometry height="20" width="430" y="98" as="geometry" />
+        <mxCell id="c_VolunteerController-6" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ deleteTask(id: string): void" vertex="1">
+          <mxGeometry height="20" width="430" y="110" as="geometry" />
         </mxCell>
-        <mxCell id="c_VolunteerController-5" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ assignVolunteer(taskId: int, v: Volunteer): void" vertex="1">
-          <mxGeometry height="20" width="430" y="118" as="geometry" />
+        <mxCell id="c_VolunteerController-7" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ assignVolunteer(taskId: string,volunteerId: string): Map" vertex="1">
+          <mxGeometry height="20" width="430" y="130" as="geometry" />
         </mxCell>
-        <mxCell id="c_VolunteerController-6" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ removeVolunteer(taskId: int, v: Volunteer): void" vertex="1">
-          <mxGeometry height="20" width="430" y="138" as="geometry" />
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-1" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ removeVolunteer(taskId: string, volunteerId: string): Map" vertex="1">
+          <mxGeometry height="20" width="430" y="150" as="geometry" />
         </mxCell>
-        <mxCell id="c_VolunteerController-7" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ listAssignees(taskId: int): void" vertex="1">
-          <mxGeometry height="20" width="430" y="158" as="geometry" />
+        <mxCell id="c_VolunteerController-8" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ listAssignees(taskId: string): list&amp;lt;Map&amp;gt;" vertex="1">
+          <mxGeometry height="20" width="430" y="170" as="geometry" />
         </mxCell>
-        <mxCell id="c_VolunteerController-8" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ logHours(v: Volunteer, t: VolunteerTask, h: double): void" vertex="1">
-          <mxGeometry height="20" width="430" y="178" as="geometry" />
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-2" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="+ logHours(data: Map): Map" vertex="1">
+          <mxGeometry height="20" width="430" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-3" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- loadTask(id: string): volunteerTask" vertex="1">
+          <mxGeometry height="20" width="430" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-4" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- loadVolunteer(id: string): volunteer" vertex="1">
+          <mxGeometry height="20" width="430" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-5" parent="c_VolunteerController" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=12;" value="- toResponse(t: VolunteerTask): Map" vertex="1">
+          <mxGeometry height="20" width="430" y="250" as="geometry" />
         </mxCell>
         <mxCell id="c_IObserver" parent="1" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;swimlaneFillColor=#ffffff;fontSize=12;" value="«interface»&lt;br&gt;&lt;b&gt;IObserver&lt;/b&gt;" vertex="1">
           <mxGeometry height="60" width="210" x="2140" y="900" as="geometry" />
@@ -1115,9 +1148,9 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="e13" edge="1" parent="1" source="c_BeneficiaryController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=open;endFill=0;endSize=10;startArrow=diamond;startFill=0;startSize=16;exitX=0;exitY=0.858586;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.619048;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="c_Beneficiary" value="">
-          <mxGeometry relative="1" as="geometry">
+          <mxGeometry relative="1" x="-0.375" as="geometry">
             <Array as="points">
-              <mxPoint x="2030" y="730" />
+              <mxPoint x="2030" y="796.2" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -1128,10 +1161,11 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e16" edge="1" parent="1" source="c_VolunteerController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=open;endFill=0;endSize=10;exitX=0.697674;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.449438;entryDx=0;entryDy=0;entryPerimeter=0;" target="c_HoursLog" value="">
-          <mxGeometry relative="1" as="geometry">
+          <mxGeometry relative="1" x="-0.1717" as="geometry">
             <Array as="points">
-              <mxPoint x="3360" y="758" />
-              <mxPoint x="3360" y="1500" />
+              <mxPoint x="3300" y="840" />
+              <mxPoint x="3360" y="840" />
+              <mxPoint x="3360" y="1550.3" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -1181,8 +1215,9 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e24" edge="1" parent="1" source="c_User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=block;endFill=0;endSize=14;dashed=1;exitX=1;exitY=0.226131;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.47619;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" target="c_IObserver" value="">
-          <mxGeometry relative="1" as="geometry">
+          <mxGeometry relative="1" x="0.0019" as="geometry">
             <Array as="points">
+              <mxPoint x="2010" y="990" />
               <mxPoint x="2240" y="990" />
             </Array>
           </mxGeometry>
@@ -1392,13 +1427,13 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e63" edge="1" parent="1" source="c_Donation" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=open;endFill=0;endSize=10;exitX=0.916667;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.09375;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="c_DatabaseConnection" value="">
-          <mxGeometry relative="1" x="-0.0001" as="geometry">
+          <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="870" y="1238" />
               <mxPoint x="870" y="1240" />
               <mxPoint x="1110" y="1240" />
               <mxPoint x="1110" y="1660" />
-              <mxPoint x="2130.9" y="1660" />
+              <mxPoint x="2150.9" y="1660" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -1411,7 +1446,8 @@
               <mxPoint x="3000" y="1320" />
               <mxPoint x="2860" y="1320" />
               <mxPoint x="2860" y="1753.3" />
-              <mxPoint x="2450" y="1753.3" />
+              <mxPoint x="2470" y="1753.3" />
+              <mxPoint x="2470" y="1879.4" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -1465,6 +1501,38 @@
             </Array>
             <mxPoint x="2427" y="650" as="sourcePoint" />
             <mxPoint x="2680" y="1786" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-6" edge="1" parent="1" source="c_VolunteerController-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=open;endFill=0;endSize=10;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1.005;entryY=0.12;entryDx=0;entryDy=0;entryPerimeter=0;" target="c_Volunteer-4" value="">
+          <mxGeometry relative="1" x="-0.4063" as="geometry">
+            <Array as="points">
+              <mxPoint x="2920" y="680" />
+              <mxPoint x="2920" y="1520.4" />
+            </Array>
+            <mxPoint x="2920" y="700" as="sourcePoint" />
+            <mxPoint x="2470" y="1520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-7" edge="1" parent="1" source="q9iGqBGL9ZMPdnbSKDOB-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=open;endFill=0;endSize=10;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=0.994;entryY=0.075;entryDx=0;entryDy=0;entryPerimeter=0;exitPerimeter=0;" target="c_DatabaseConnection-7" value="">
+          <mxGeometry relative="1" x="-0.4835" as="geometry">
+            <Array as="points">
+              <mxPoint x="2889.5" y="770" />
+              <mxPoint x="2889.5" y="1610" />
+              <mxPoint x="2520" y="1610" />
+              <mxPoint x="2520" y="1933.4" />
+            </Array>
+            <mxPoint x="2969.5" y="770" as="sourcePoint" />
+            <mxPoint x="2420.5" y="1610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="q9iGqBGL9ZMPdnbSKDOB-23" edge="1" parent="1" source="q9iGqBGL9ZMPdnbSKDOB-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;endArrow=open;endFill=0;endSize=10;startArrow=diamond;startFill=0;startSize=16;exitX=0;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.793;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="c_Need" value="">
+          <mxGeometry relative="1" x="-0.6262" as="geometry">
+            <Array as="points">
+              <mxPoint x="2040" y="760" />
+              <mxPoint x="2040" y="1770" />
+            </Array>
+            <mxPoint x="2090" y="760" as="sourcePoint" />
+            <mxPoint x="2029" y="1339" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>

@@ -169,4 +169,9 @@ public class Event implements ISubject {
                 .append("status", status)
                 .append("registrations", regDocs);
     }
+
+    public void setTitle(String title) { this.title = title; }
+    public void setDate(Date date) { this.date = date; }
+    public void setLocation(String location) { this.location = location; }
+    public void setCapacity(int capacity) { this.capacity = capacity; }
 }
