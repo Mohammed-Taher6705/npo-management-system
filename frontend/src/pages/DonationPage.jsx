@@ -1,5 +1,6 @@
 // View for DonationController.
 // Lists donations, records a new money or in-kind donation, changes status, deletes, shows a summary.
+
 import { useCallback, useEffect, useState } from 'react'
 import { request } from '../api'
 
@@ -8,15 +9,27 @@ const STATUSES = ['PENDING', 'COMPLETED', 'FAILED', 'RECEIVED', 'CANCELLED']
 const api = {
   list: () => request('/donations'),
   get: (id) => request(`/donations/${id}`),
-  pay: (id, data) => request(`/donations/${id}/pay`, { method: 'POST', body: JSON.stringify(data) }),
-  create: (data) => request('/donations', { method: 'POST', body: JSON.stringify(data) }),
+  pay: (id, data) => request(`/donations/${id}/pay`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }),
+  create: (data) => request('/donations', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }),
   setStatus: (id, status) =>
-    request(`/donations/${id}`, { method: 'PUT', body: JSON.stringify({ status }) }),
-  remove: (id) => request(`/donations/${id}`, { method: 'DELETE' }),
+    request(`/donations/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ status }),
+    }),
+  remove: (id) => request(`/donations/${id}`, {
+    method: 'DELETE',
+  }),
 }
 
 // ---- Helpers ----
-const isInKind = (d) => String(d.type || '').toLowerCase().includes('kind')
+const isInKind = (d) =>
+  String(d.type || '').toLowerCase().includes('kind')
 
 const donorLabel = (d) =>
   typeof d.donor === 'object' && d.donor !== null
@@ -28,39 +41,77 @@ const detailsOf = (d) =>
     ? `${d.quantity} × ${d.itemName} (est. ${d.estimatedValue})`
     : `${d.amount} ${d.currency ?? ''}${d.paymentMethod ? ` (${d.paymentMethod})` : ''}`
 
-const dateOf = (d) => (d.date ? String(d.date).slice(0, 10) : '')
+const dateOf = (d) =>
+  d.date ? String(d.date).slice(0, 10) : ''
 
-// Payment method choices (Strategy pattern on the server). '' means pay later.
-const EMPTY_PAYMENT = { paymentMethod: '', receivedBy: '', checkNo: '', bankName: '', cardHolder: '' }
+// Payment method choices (Strategy pattern on the server).
+// '' means pay later.
+const EMPTY_PAYMENT = {
+  paymentMethod: '',
+  receivedBy: '',
+  checkNo: '',
+  bankName: '',
+  cardHolder: '',
+}
 
 // Returns { data } with the fields the chosen method needs, or { error }.
 function paymentPayload(p) {
   switch (p.paymentMethod) {
     case 'cash':
       return p.receivedBy.trim()
-        ? { data: { paymentMethod: 'cash', receivedBy: p.receivedBy.trim() } }
-        : { error: 'Enter who received the cash.' }
+        ? {
+            data: {
+              paymentMethod: 'cash',
+              receivedBy: p.receivedBy.trim(),
+            },
+          }
+        : { error: 'Select the admin who received the cash.' }
+
     case 'check':
-      if (!/^\d+$/.test(p.checkNo.trim())) return { error: 'Check number must be digits only.' }
-      if (!p.bankName.trim()) return { error: 'Enter the bank name.' }
-      return { data: { paymentMethod: 'check', checkNo: p.checkNo.trim(), bankName: p.bankName.trim() } }
+      if (!/^\d+$/.test(p.checkNo.trim())) {
+        return { error: 'Check number must be digits only.' }
+      }
+
+      if (!p.bankName.trim()) {
+        return { error: 'Enter the bank name.' }
+      }
+
+      return {
+        data: {
+          paymentMethod: 'check',
+          checkNo: p.checkNo.trim(),
+          bankName: p.bankName.trim(),
+        },
+      }
+
     case 'online':
       return p.cardHolder.trim()
-        ? { data: { paymentMethod: 'online', cardHolder: p.cardHolder.trim() } }
+        ? {
+            data: {
+              paymentMethod: 'online',
+              cardHolder: p.cardHolder.trim(),
+            },
+          }
         : { error: 'Enter the card holder name.' }
+
     default:
-      return { data: {} } // pay later
+      return { data: {} } // Pay later
   }
 }
 
-function PaymentFields({ value, onChange }) {
-  const set = (field) => (e) => onChange({ ...value, [field]: e.target.value })
+// ---- Payment Fields ----
+function PaymentFields({ value, onChange, admins }) {
+  const set = (field) => (e) =>
+    onChange({ ...value, [field]: e.target.value })
 
   return (
     <>
       <label>
         Payment method
-        <select value={value.paymentMethod} onChange={set('paymentMethod')}>
+        <select
+          value={value.paymentMethod}
+          onChange={set('paymentMethod')}
+        >
           <option value="">Pay later</option>
           <option value="cash">Cash</option>
           <option value="check">Check</option>
@@ -71,7 +122,25 @@ function PaymentFields({ value, onChange }) {
       {value.paymentMethod === 'cash' && (
         <label>
           Received by
-          <input value={value.receivedBy} onChange={set('receivedBy')} />
+          <select
+            value={value.receivedBy}
+            onChange={set('receivedBy')}
+            required
+          >
+            <option value="">Select an admin</option>
+
+            {admins.map((admin) => (
+              <option key={admin.id} value={admin.name}>
+                {admin.name} ({admin.email})
+              </option>
+            ))}
+          </select>
+
+          {admins.length === 0 && (
+            <span className="muted">
+              No administrators found. Register an ADMIN user first.
+            </span>
+          )}
         </label>
       )}
 
@@ -79,11 +148,20 @@ function PaymentFields({ value, onChange }) {
         <>
           <label>
             Check number
-            <input value={value.checkNo} onChange={set('checkNo')} />
+            <input
+              value={value.checkNo}
+              onChange={set('checkNo')}
+              required
+            />
           </label>
+
           <label>
             Bank name
-            <input value={value.bankName} onChange={set('bankName')} />
+            <input
+              value={value.bankName}
+              onChange={set('bankName')}
+              required
+            />
           </label>
         </>
       )}
@@ -91,7 +169,11 @@ function PaymentFields({ value, onChange }) {
       {value.paymentMethod === 'online' && (
         <label>
           Card holder name
-          <input value={value.cardHolder} onChange={set('cardHolder')} />
+          <input
+            value={value.cardHolder}
+            onChange={set('cardHolder')}
+            required
+          />
         </label>
       )}
     </>
@@ -113,17 +195,24 @@ const EMPTY_FORM = {
 export default function DonationPage() {
   const [items, setItems] = useState([])
   const [donors, setDonors] = useState([])
-  const [form, setForm] = useState(null) // null = hidden
-  const [selected, setSelected] = useState(null) // donation shown in the summary panel
-  const [payForm, setPayForm] = useState(null) // { id, ...payment fields } while taking payment
+  const [admins, setAdmins] = useState([])
+
+  const [form, setForm] = useState(null)
+  const [selected, setSelected] = useState(null)
+  const [payForm, setPayForm] = useState(null)
+
   const [message, setMessage] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  const showMessage = (text) => setMessage({ kind: 'ok', text })
-  const showError = (text) => setMessage({ kind: 'error', text })
+  const showMessage = (text) =>
+    setMessage({ kind: 'ok', text })
+
+  const showError = (text) =>
+    setMessage({ kind: 'error', text })
 
   const refresh = useCallback(async () => {
     setLoading(true)
+
     try {
       setItems(await api.list())
     } catch (e) {
@@ -138,29 +227,51 @@ export default function DonationPage() {
     refresh()
   }, [refresh])
 
-  // Load donors so the user can select a donor by name instead of entering an ID.
+  // Load users and separate donors from administrators.
   useEffect(() => {
     request('/users')
       .then((users) => {
-        setDonors(users.filter((user) => user.role === 'DONOR'))
+        setDonors(
+          users.filter((user) => user.role === 'DONOR')
+        )
+
+        setAdmins(
+          users.filter((user) => user.role === 'ADMIN')
+        )
       })
       .catch((e) => {
-        showError(`Could not load donors: ${e.message}`)
+        showError(`Could not load users: ${e.message}`)
       })
   }, [])
 
-  const set = (field) => (e) => setForm({ ...form, [field]: e.target.value })
+  const set = (field) => (e) =>
+    setForm({ ...form, [field]: e.target.value })
 
+  // ---- Record Donation ----
   const save = async (e) => {
     e.preventDefault()
-    if (!form.donorId.trim()) return showError('Select a donor.')
+
+    if (!form.donorId.trim()) {
+      return showError('Select a donor.')
+    }
 
     let data
+
     if (form.type === 'money') {
-      if (!(Number(form.amount) > 0)) return showError('Enter an amount greater than 0.')
-      if (!form.currency.trim()) return showError('Enter a currency.')
+      if (!(Number(form.amount) > 0)) {
+        return showError('Enter an amount greater than 0.')
+      }
+
+      if (!form.currency.trim()) {
+        return showError('Enter a currency.')
+      }
+
       const pay = paymentPayload(form)
-      if (pay.error) return showError(pay.error)
+
+      if (pay.error) {
+        return showError(pay.error)
+      }
+
       data = {
         type: 'money',
         donorId: form.donorId.trim(),
@@ -169,10 +280,21 @@ export default function DonationPage() {
         ...pay.data,
       }
     } else {
-      if (!form.itemName.trim()) return showError('Enter the item name.')
-      if (!(Number(form.quantity) >= 1)) return showError('Quantity must be at least 1.')
-      if (form.estimatedValue === '' || Number(form.estimatedValue) < 0)
+      if (!form.itemName.trim()) {
+        return showError('Enter the item name.')
+      }
+
+      if (!(Number(form.quantity) >= 1)) {
+        return showError('Quantity must be at least 1.')
+      }
+
+      if (
+        form.estimatedValue === '' ||
+        Number(form.estimatedValue) < 0
+      ) {
         return showError('Enter the estimated value (0 or more).')
+      }
+
       data = {
         type: 'in-kind',
         donorId: form.donorId.trim(),
@@ -184,6 +306,7 @@ export default function DonationPage() {
 
     try {
       await api.create(data)
+
       showMessage('Donation recorded.')
       setForm(null)
       refresh()
@@ -192,12 +315,19 @@ export default function DonationPage() {
     }
   }
 
+  // ---- Take Payment ----
   const payNow = async (e) => {
     e.preventDefault()
+
     const pay = paymentPayload(payForm)
-    if (pay.error) return showError(pay.error)
+
+    if (pay.error) {
+      return showError(pay.error)
+    }
+
     try {
       await api.pay(payForm.id, pay.data)
+
       showMessage('Payment received.')
       setPayForm(null)
       refresh()
@@ -206,9 +336,11 @@ export default function DonationPage() {
     }
   }
 
+  // ---- Change Status ----
   const changeStatus = async (d, status) => {
     try {
       await api.setStatus(d.id, status)
+
       showMessage(`Status changed to ${status}.`)
       refresh()
     } catch (err) {
@@ -216,18 +348,28 @@ export default function DonationPage() {
     }
   }
 
+  // ---- Delete Donation ----
   const remove = async (d) => {
-    if (!window.confirm('Delete this donation? This cannot be undone.')) return
+    if (!window.confirm('Delete this donation? This cannot be undone.')) {
+      return
+    }
+
     try {
       await api.remove(d.id)
+
       showMessage('Donation deleted.')
-      if (selected?.id === d.id) setSelected(null)
+
+      if (selected?.id === d.id) {
+        setSelected(null)
+      }
+
       refresh()
     } catch (err) {
       showError(`Could not delete: ${err.message}`)
     }
   }
 
+  // ---- Donation Summary ----
   const showDonationSummary = async (d) => {
     try {
       setSelected(await api.get(d.id))
@@ -236,23 +378,37 @@ export default function DonationPage() {
     }
   }
 
-  // Overview: count and money totals per currency
+  // Overview: money totals per currency.
   const totals = {}
+
   items.filter((d) => !isInKind(d)).forEach((d) => {
-    totals[d.currency] = (totals[d.currency] || 0) + Number(d.amount || 0)
+    totals[d.currency] =
+      (totals[d.currency] || 0) + Number(d.amount || 0)
   })
-  const totalsText = Object.entries(totals).map(([c, v]) => `${v} ${c}`).join(', ')
+
+  const totalsText = Object.entries(totals)
+    .map(([currency, value]) => `${value} ${currency}`)
+    .join(', ')
 
   return (
-    <section className="lookup-page" aria-labelledby="donations-title">
+    <section
+      className="lookup-page"
+      aria-labelledby="donations-title"
+    >
       <p className="eyebrow">NPO Management</p>
+
       <h1 id="donations-title">Donations</h1>
-      <p className="muted">Record and manage money and in-kind donations.</p>
+
+      <p className="muted">
+        Record and manage money and in-kind donations.
+      </p>
 
       {message && (
         <p
           role="status"
-          className={`notice ${message.kind === 'error' ? 'error' : 'success'}`}
+          className={`notice ${
+            message.kind === 'error' ? 'error' : 'success'
+          }`}
         >
           {message.text}
         </p>
@@ -264,21 +420,29 @@ export default function DonationPage() {
       </p>
 
       <div className="lookup-toolbar">
-        <button className="primary" onClick={() => setForm({ ...EMPTY_FORM })}>
+        <button
+          className="primary"
+          onClick={() => setForm({ ...EMPTY_FORM })}
+        >
           Record donation
         </button>
+
         <button onClick={refresh} disabled={loading}>
           {loading ? 'Loading…' : 'Refresh'}
         </button>
       </div>
 
+      {/* Record Donation Form */}
       {form && (
         <form className="lookup-form" onSubmit={save}>
           <h2>Record donation</h2>
 
           <label>
             Donation type
-            <select value={form.type} onChange={set('type')}>
+            <select
+              value={form.type}
+              onChange={set('type')}
+            >
               <option value="money">Money</option>
               <option value="in-kind">In-kind (items)</option>
             </select>
@@ -290,9 +454,9 @@ export default function DonationPage() {
               value={form.donorId}
               onChange={set('donorId')}
               required
-              autoFocus
             >
               <option value="">Select a donor</option>
+
               {donors.map((donor) => (
                 <option key={donor.id} value={donor.id}>
                   {donor.name} ({donor.email})
@@ -322,16 +486,26 @@ export default function DonationPage() {
 
               <label>
                 Currency
-                <input value={form.currency} onChange={set('currency')} />
+                <input
+                  value={form.currency}
+                  onChange={set('currency')}
+                />
               </label>
 
-              <PaymentFields value={form} onChange={setForm} allowLater />
+              <PaymentFields
+                value={form}
+                onChange={setForm}
+                admins={admins}
+              />
             </>
           ) : (
             <>
               <label>
                 Item name
-                <input value={form.itemName} onChange={set('itemName')} />
+                <input
+                  value={form.itemName}
+                  onChange={set('itemName')}
+                />
               </label>
 
               <label>
@@ -359,25 +533,47 @@ export default function DonationPage() {
           )}
 
           <div className="actions">
-            <button type="submit" className="primary">Record donation</button>
-            <button type="button" onClick={() => setForm(null)}>Cancel</button>
+            <button type="submit" className="primary">
+              Record donation
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setForm(null)}
+            >
+              Cancel
+            </button>
           </div>
         </form>
       )}
 
+      {/* Take Payment Form */}
       {payForm && (
         <form className="lookup-form" onSubmit={payNow}>
           <h2>Take payment</h2>
 
-          <PaymentFields value={payForm} onChange={setPayForm} />
+          <PaymentFields
+            value={payForm}
+            onChange={setPayForm}
+            admins={admins}
+          />
 
           <div className="actions">
-            <button type="submit" className="primary">Take payment</button>
-            <button type="button" onClick={() => setPayForm(null)}>Cancel</button>
+            <button type="submit" className="primary">
+              Take payment
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setPayForm(null)}
+            >
+              Cancel
+            </button>
           </div>
         </form>
       )}
 
+      {/* Donation Summary */}
       {selected && (
         <section className="lookup-form">
           <h2>Donation summary</h2>
@@ -409,10 +605,13 @@ export default function DonationPage() {
             <dd>{selected.id}</dd>
           </dl>
 
-          <button onClick={() => setSelected(null)}>Close</button>
+          <button onClick={() => setSelected(null)}>
+            Close
+          </button>
         </section>
       )}
 
+      {/* All Donations */}
       <h2>All donations</h2>
 
       <div className="lookup-table">
@@ -432,19 +631,30 @@ export default function DonationPage() {
             {items.map((d) => (
               <tr key={d.id}>
                 <td>{dateOf(d)}</td>
-                <td>{isInKind(d) ? 'In-kind' : 'Money'}</td>
+
+                <td>
+                  {isInKind(d) ? 'In-kind' : 'Money'}
+                </td>
+
                 <td>{donorLabel(d)}</td>
+
                 <td>{detailsOf(d)}</td>
 
                 <td>
                   <select
                     value={d.status}
-                    onChange={(e) => changeStatus(d, e.target.value)}
+                    onChange={(e) =>
+                      changeStatus(d, e.target.value)
+                    }
                     aria-label="Donation status"
                   >
-                    {[...new Set([d.status, ...STATUSES])].filter(Boolean).map((st) => (
-                      <option key={st}>{st}</option>
-                    ))}
+                    {[...new Set([d.status, ...STATUSES])]
+                      .filter(Boolean)
+                      .map((status) => (
+                        <option key={status}>
+                          {status}
+                        </option>
+                      ))}
                   </select>
                 </td>
 
@@ -452,14 +662,28 @@ export default function DonationPage() {
                   <div className="actions">
                     {!isInKind(d) && d.status === 'PENDING' && (
                       <button
-                        onClick={() => setPayForm({ id: d.id, ...EMPTY_PAYMENT, paymentMethod: 'cash' })}
+                        onClick={() =>
+                          setPayForm({
+                            id: d.id,
+                            ...EMPTY_PAYMENT,
+                            paymentMethod: 'cash',
+                          })
+                        }
                       >
                         Take payment
                       </button>
                     )}
 
-                    <button onClick={() => showDonationSummary(d)}>View</button>
-                    <button className="danger" onClick={() => remove(d)}>Delete</button>
+                    <button onClick={() => showDonationSummary(d)}>
+                      View
+                    </button>
+
+                    <button
+                      className="danger"
+                      onClick={() => remove(d)}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </td>
               </tr>
