@@ -4,3 +4,32 @@ body { margin: 0; font-family: system-ui, sans-serif; background: #f6f7f9; color
 .nav a { color: #cfe0f5; text-decoration: none; }
 .nav a.active { color: #fff; font-weight: 600; }
 .content { padding: 24px; }
+
+* { box-sizing: border-box; }
+.nav { flex-wrap: wrap; }
+.lookup-page { max-width: 1000px; margin: 16px auto; }
+.lookup-page h1 { font-size: 32px; margin: 8px 0; }
+.eyebrow { color: #245e55; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 12px; }
+.muted { color: #526170; }
+.lookup-page button { border: 1px solid #b7c4cd; background: white; color: #213447; padding: 10px 16px; border-radius: 8px; cursor: pointer; font: inherit; }
+.lookup-page button:disabled { opacity: .55; cursor: not-allowed; }
+.lookup-page button.primary, .lookup-types button[aria-pressed=true] { background: #176858; border-color: #176858; color: white; }
+.lookup-page button.danger { color: #a32222; }
+.lookup-types, .lookup-toolbar, .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.lookup-types { margin: 24px 0; }
+.lookup-toolbar { align-items: end; margin-bottom: 20px; }
+.lookup-toolbar label { flex: 1; min-width: 180px; }
+.lookup-page label { display: grid; gap: 6px; font-weight: 600; }
+.lookup-page input, .lookup-page select { width: 100%; border: 1px solid #9fadb7; border-radius: 7px; padding: 10px; font: inherit; background: white; color: #213447; }
+.lookup-page :focus-visible { outline: 3px solid #369e89; outline-offset: 3px; }
+.lookup-form, .lookup-table { background: white; border: 1px solid #dbe2e6; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.lookup-form h2 { margin-top: 0; }
+.lookup-form fieldset { border: 0; padding: 0; display: grid; gap: 16px; }
+.lookup-table { overflow-x: auto; }
+.lookup-table table { width: 100%; border-collapse: collapse; text-align: left; }
+.lookup-table caption { text-align: left; font-weight: 700; margin-bottom: 12px; }
+.lookup-table th, .lookup-table td { padding: 14px 10px; border-bottom: 1px solid #e5e9ec; overflow-wrap: anywhere; }
+.notice { padding: 14px; border-radius: 8px; }
+.notice.error { background: #fdeaea; color: #8e2424; }
+.notice.success { background: #def4e9; color: #145338; }
+@media(max-width: 600px) { .content { padding: 14px; } .nav { padding: 16px; gap: 12px; } .lookup-form, .lookup-table { padding: 12px; } }

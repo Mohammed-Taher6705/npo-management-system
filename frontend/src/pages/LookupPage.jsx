@@ -1,245 +1,112 @@
-// View for LookupController. Owner: Person B
-// Manages the three lookup tables (CRUD): Skills, Item categories, Need categories.
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { api } from '../api'
 
-// ---- Config: change only this block if your backend differs ----
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8080/api'
-
-// One entry per lookup table. `field` is the extra attribute from the class diagram.
 const TYPES = {
-  skills: {
-    label: 'Skills',
-    field: 'level',
-    fieldLabel: 'Level',
-    options: ['Beginner', 'Intermediate', 'Advanced'],
-  },
-  'item-categories': { label: 'Item categories', field: 'unit', fieldLabel: 'Unit' },
-  'need-categories': { label: 'Need categories', field: 'description', fieldLabel: 'Description' },
+  skills: { label: 'Skills', singular: 'skill', field: 'level', extra: 'Level', options: ['Beginner', 'Intermediate', 'Advanced'] },
+  'item-categories': { label: 'Item categories', singular: 'item category', field: 'unit', extra: 'Unit' },
+  'need-categories': { label: 'Need categories', singular: 'need category', field: 'description', extra: 'Description' },
 }
 
-// ---- API client (talks to LookupController) ----
-async function request(path, options) {
-  const res = await fetch(`${API}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
-    ...options,
-  })
-  if (!res.ok) {
-    throw new Error((await res.text()) || `Request failed (${res.status})`)
-  }
-  return res.status === 204 ? null : res.json()
-}
-
-const api = {
-  list: (type) => request(`/lookups/${type}`),
-  create: (type, data) => request(`/lookups/${type}`, { method: 'POST', body: JSON.stringify(data) }),
-  update: (type, id, data) =>
-    request(`/lookups/${type}/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
-  remove: (type, id) => request(`/lookups/${type}/${id}`, { method: 'DELETE' }),
-}
-
-const getId = (item) => item.id ?? item._id // MongoDB ids are strings
-
-// ---- View ----
+// MVC View: validation and presentation live here; persistence goes through LookupController.
 export default function LookupPage() {
   const [type, setType] = useState('skills')
   const [items, setItems] = useState([])
-  const [form, setForm] = useState(null) // null = hidden, otherwise { id?, name, extra }
-  const [message, setMessage] = useState(null) // { kind: 'ok' | 'error', text }
-  const [loading, setLoading] = useState(false)
-
+  const [form, setForm] = useState(null)
+  const [message, setMessage] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [busy, setBusy] = useState(false)
+  const [query, setQuery] = useState('')
+  const [revision, setRevision] = useState(0)
+  const locked = useRef(false)
   const config = TYPES[type]
 
-  const showMessage = (text) => setMessage({ kind: 'ok', text })
-  const showError = (text) => setMessage({ kind: 'error', text })
-
-  const refresh = useCallback(async () => {
-    setLoading(true)
-    try {
-      setItems(await api.list(type))
-    } catch (e) {
-      setItems([])
-      showError(`Could not load ${TYPES[type].label.toLowerCase()}: ${e.message}`)
-    } finally {
-      setLoading(false)
-    }
-  }, [type])
-
   useEffect(() => {
+    const controller = new AbortController()
+    setLoading(true)
+    setItems([])
+    api.get(`/lookups/${type}`, { signal: controller.signal })
+      .then(data => { if (!controller.signal.aborted) setItems(data) })
+      .catch(error => { if (!controller.signal.aborted) setMessage({ error: true, text: `Could not load records: ${error.message}` }) })
+      .finally(() => { if (!controller.signal.aborted) setLoading(false) })
+    return () => controller.abort()
+  }, [type, revision])
+
+  function selectType(next) {
+    setType(next)
     setForm(null)
     setMessage(null)
-    refresh()
-  }, [refresh])
+    setQuery('')
+  }
 
-  const openForm = (item) =>
-    setForm(
-      item
-        ? { id: getId(item), name: item.name ?? '', extra: item[config.field] ?? '' }
-        : { name: '', extra: config.options ? config.options[0] : '' }
-    )
+  async function mutate(action, success) {
+    if (locked.current) return
+    locked.current = true
+    setBusy(true)
+    setMessage(null)
+    try {
+      await action()
+      setForm(null)
+      setMessage({ text: success })
+      setRevision(value => value + 1)
+    } catch (error) {
+      setMessage({ error: true, text: error.message })
+    } finally {
+      locked.current = false
+      setBusy(false)
+    }
+  }
 
-  const save = async (e) => {
-    e.preventDefault()
+  function save(event) {
+    event.preventDefault()
     const name = form.name.trim()
-    if (!name) {
-      showError('Enter a name.')
+    const extra = form.extra.trim()
+    if (!name || !extra) {
+      setMessage({ error: true, text: `Enter a name and ${config.extra.toLowerCase()}.` })
       return
     }
-    const data = { name, [config.field]: form.extra.trim() }
-    try {
-      if (form.id) {
-        await api.update(type, form.id, data)
-        showMessage(`Saved changes to "${name}".`)
-      } else {
-        await api.create(type, data)
-        showMessage(`Added "${name}".`)
-      }
-      setForm(null)
-      refresh()
-    } catch (err) {
-      showError(`Could not save: ${err.message}`)
-    }
+    const data = { name, [config.field]: extra }
+    const url = `/lookups/${type}`
+    mutate(() => form.id ? api.put(`${url}/${form.id}`, data) : api.post(url, data), 'Record saved successfully.')
   }
 
-  const remove = async (item) => {
-    if (!window.confirm(`Delete "${item.name}"? This cannot be undone.`)) return
-    try {
-      await api.remove(type, getId(item))
-      showMessage(`Deleted "${item.name}".`)
-      refresh()
-    } catch (err) {
-      showError(`Could not delete: ${err.message}`)
-    }
-  }
-
+  const visible = items.filter(item => `${item.name || ''} ${item[config.field] || ''}`.toLowerCase().includes(query.toLowerCase()))
   return (
-    <div style={s.page}>
-      <h2 style={s.title}>Lookup tables</h2>
-
-      <div style={s.tabs} role="tablist">
-        {Object.entries(TYPES).map(([key, t]) => (
-          <button
-            key={key}
-            role="tab"
-            aria-selected={key === type}
-            onClick={() => setType(key)}
-            style={{ ...s.tab, ...(key === type ? s.tabActive : null) }}
-          >
-            {t.label}
-          </button>
-        ))}
+    <section className="lookup-page" aria-labelledby="lookup-title">
+      <p className="eyebrow">NPO Management</p>
+      <h1 id="lookup-title">Lookup tables</h1>
+      <p className="muted">Manage the skills and categories used across your organization.</p>
+      <div className="lookup-types" role="group" aria-label="Lookup type">
+        {Object.entries(TYPES).map(([key, value]) => <button key={key} aria-pressed={type === key} disabled={busy} onClick={() => selectType(key)}>{value.label}</button>)}
       </div>
-
-      {message && (
-        <p role="status" style={{ ...s.message, ...(message.kind === 'error' ? s.error : s.ok) }}>
-          {message.text}
-        </p>
-      )}
-
-      <div style={s.toolbar}>
-        <button style={s.primary} onClick={() => openForm(null)}>
-          Add {config.label.toLowerCase().replace(/s$/, '')}
-        </button>
-        <button style={s.button} onClick={refresh} disabled={loading}>
-          {loading ? 'Loading…' : 'Refresh'}
-        </button>
+      {message && <p className={`notice ${message.error ? 'error' : 'success'}`} role={message.error ? 'alert' : 'status'}>{message.text}</p>}
+      <div className="lookup-toolbar">
+        <label>Search {config.label.toLowerCase()}<input type="search" value={query} onChange={e => setQuery(e.target.value)} /></label>
+        <button className="primary" disabled={busy || loading} onClick={() => { setMessage(null); setForm({ name: '', extra: config.options?.[0] || '' }) }}>Add {config.singular}</button>
+        <button disabled={busy || loading} onClick={() => { setMessage(null); setRevision(value => value + 1) }}>Refresh</button>
       </div>
-
-      {form && (
-        <form onSubmit={save} style={s.form}>
-          <label style={s.label}>
-            Name
-            <input
-              style={s.input}
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              autoFocus
-            />
-          </label>
-          <label style={s.label}>
-            {config.fieldLabel}
-            {config.options ? (
-              <select
-                style={s.input}
-                value={form.extra}
-                onChange={(e) => setForm({ ...form, extra: e.target.value })}
-              >
-                {config.options.map((o) => (
-                  <option key={o}>{o}</option>
-                ))}
-              </select>
-            ) : (
-              <input
-                style={s.input}
-                value={form.extra}
-                onChange={(e) => setForm({ ...form, extra: e.target.value })}
-              />
-            )}
-          </label>
-          <div style={s.toolbar}>
-            <button type="submit" style={s.primary}>
-              {form.id ? 'Save changes' : 'Add'}
-            </button>
-            <button type="button" style={s.button} onClick={() => setForm(null)}>
-              Cancel
-            </button>
-          </div>
-        </form>
-      )}
-
-      <table style={s.table}>
-        <thead>
-          <tr>
-            <th style={s.th}>Name</th>
-            <th style={s.th}>{config.fieldLabel}</th>
-            <th style={s.th}></th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item) => (
-            <tr key={getId(item)}>
-              <td style={s.td}>{item.name}</td>
-              <td style={s.td}>{item[config.field]}</td>
-              <td style={{ ...s.td, textAlign: 'right' }}>
-                <button style={s.button} onClick={() => openForm(item)}>
-                  Edit
-                </button>{' '}
-                <button style={s.danger} onClick={() => remove(item)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-          {!loading && items.length === 0 && (
-            <tr>
-              <td style={s.td} colSpan={3}>
-                No {config.label.toLowerCase()} yet. Use the add button to create the first one.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+      {form && <form className="lookup-form" onSubmit={save}>
+        <h2>{form.id ? 'Edit' : 'Add'} {config.singular}</h2>
+        <fieldset disabled={busy}>
+          <label>Name<input required maxLength={120} value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} /></label>
+          <label>{config.extra}{config.options ? <select value={form.extra} onChange={e => setForm({ ...form, extra: e.target.value })}>
+            {!config.options.includes(form.extra) && <option value={form.extra}>{form.extra || 'Choose a level'}</option>}
+            {config.options.map(value => <option key={value}>{value}</option>)}
+          </select> : <input required maxLength={500} value={form.extra} onChange={e => setForm({ ...form, extra: e.target.value })} />}</label>
+          <div className="actions"><button className="primary" type="submit">{busy ? 'Saving...' : 'Save'}</button><button type="button" onClick={() => setForm(null)}>Cancel</button></div>
+        </fieldset>
+      </form>}
+      <div className="lookup-table" aria-busy={loading}>
+        <table><caption>{config.label}</caption><thead><tr><th scope="col">Name</th><th scope="col">{config.extra}</th><th scope="col">Actions</th></tr></thead>
+          <tbody>{loading ? <tr><td colSpan={3}>Loading records...</td></tr> : visible.map(item => <tr key={item.id}>
+            <td>{item.name}</td><td>{item[config.field]}</td><td><div className="actions">
+              <button disabled={busy} aria-label={`Edit ${item.name}`} onClick={() => { setMessage(null); setForm({ id: item.id, name: item.name || '', extra: item[config.field] || '' }) }}>Edit</button>
+              <button className="danger" disabled={busy} aria-label={`Delete ${item.name}`} onClick={() => {
+                if (window.confirm(`Delete "${item.name}"? This cannot be undone.`)) mutate(() => api.del(`/lookups/${type}/${item.id}`), 'Record deleted successfully.')
+              }}>Delete</button>
+            </div></td>
+          </tr>)}{!loading && !visible.length && <tr><td colSpan={3}>{query ? 'No matching records.' : 'No records to display. Add a record or refresh to try again.'}</td></tr>}</tbody>
+        </table>
+      </div>
+    </section>
   )
-}
-
-// Minimal inline styles so the page works without any CSS framework.
-const s = {
-  page: { maxWidth: 760, margin: '0 auto', padding: 16, fontFamily: 'system-ui, sans-serif' },
-  title: { margin: '0 0 12px' },
-  tabs: { display: 'flex', gap: 4, borderBottom: '1px solid #ccc', marginBottom: 12 },
-  tab: { padding: '8px 14px', border: 'none', background: 'none', cursor: 'pointer', fontSize: 15 },
-  tabActive: { borderBottom: '3px solid #2563eb', fontWeight: 600 },
-  toolbar: { display: 'flex', gap: 8, margin: '12px 0' },
-  button: { padding: '6px 12px', cursor: 'pointer' },
-  primary: { padding: '6px 12px', cursor: 'pointer', background: '#2563eb', color: '#fff', border: 'none', borderRadius: 4 },
-  danger: { padding: '6px 12px', cursor: 'pointer', color: '#b91c1c' },
-  form: { display: 'grid', gap: 10, padding: 12, border: '1px solid #ddd', borderRadius: 6, marginBottom: 12 },
-  label: { display: 'grid', gap: 4, fontSize: 14 },
-  input: { padding: 6, fontSize: 15 },
-  message: { padding: '8px 12px', borderRadius: 4, margin: '0 0 8px' },
-  ok: { background: '#dcfce7', color: '#166534' },
-  error: { background: '#fee2e2', color: '#991b1b' },
-  table: { width: '100%', borderCollapse: 'collapse' },
-  th: { textAlign: 'left', padding: 8, borderBottom: '2px solid #ccc' },
-  td: { padding: 8, borderBottom: '1px solid #eee' },
 }

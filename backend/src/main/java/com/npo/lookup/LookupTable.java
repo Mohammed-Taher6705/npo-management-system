@@ -7,59 +7,75 @@ import org.bson.Document;
 
 import com.npo.common.DatabaseConnection;
 
-
 public abstract class LookupTable {
 
-    protected String id;      // MongoDB _id as hex string 
+    protected String id;
     protected String name;
 
-    protected LookupTable() { }
+    protected LookupTable() {
+    }
 
     protected LookupTable(String name) {
         this.name = name;
     }
 
-    // ----- getters / setters -----
-    public String getId() { 
-      return id; 
-    }
-    public String getName() { 
-      return name; 
-    }
-    public void setName(String name) {
-       this.name = name; 
+    public String getId() {
+        return id;
     }
 
-    // ----- subclass hooks -----
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Subclass hooks
     protected abstract String getCollectionName();
+
     protected abstract void addExtraFields(Map<String, Object> data);
+
     protected abstract void loadExtraFields(Document doc);
 
-    // ----- CRUD -----
+    // CRUD
     public void create() {
-        id = DatabaseConnection.getInstance().insert(getCollectionName(), toMap());
+        validate();
+
+        id = DatabaseConnection.getInstance()
+                .insert(getCollectionName(), toMap());
     }
 
-    /** Loads the record with this id into this object. Returns null if not found. */
     public LookupTable read(String id) {
-        Document doc = DatabaseConnection.getInstance().selectById(getCollectionName(), id);
-        if (doc == null) return null;
+        Document doc = DatabaseConnection.getInstance()
+                .selectById(getCollectionName(), id);
+
+        if (doc == null) {
+            return null;
+        }
+
         fromDocument(doc);
         return this;
     }
 
     public void edit() {
         requireId();
-        DatabaseConnection.getInstance().update(getCollectionName(), id, toMap());
+        validate();
+
+        DatabaseConnection.getInstance()
+                .update(getCollectionName(), id, toMap());
     }
 
     public void delete() {
         requireId();
-        DatabaseConnection.getInstance().delete(getCollectionName(), id);
+
+        DatabaseConnection.getInstance()
+                .delete(getCollectionName(), id);
+
         id = null;
     }
 
-    // ----- mapping to/from MongoDB -----
+    // Mapping to/from MongoDB
     public Map<String, Object> toMap() {
         Map<String, Object> data = new HashMap<>();
         data.put("name", name);
@@ -73,15 +89,41 @@ public abstract class LookupTable {
         loadExtraFields(doc);
     }
 
-     public void populate(Map<String, Object> body) {
-        Object n = body.get("name");
-        this.name = (n == null) ? null : n.toString();
+    public void populate(Map<String, Object> body) {
+        if (body == null) {
+            throw new IllegalArgumentException("Request body is required");
+        }
+
+        Object value = body.get("name");
+
+        if (value != null && !(value instanceof String)) {
+            throw new IllegalArgumentException("Name must be text");
+        }
+
+        this.name = (String) value;
         loadExtraFields(new Document(body));
+    }
+
+    // Shared validation before saving
+    protected void validate() {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Name is required");
+        }
+
+        name = name.strip();
+
+        if (name.length() > 120) {
+            throw new IllegalArgumentException(
+                    "Name must not exceed 120 characters"
+            );
+        }
     }
 
     private void requireId() {
         if (id == null) {
-            throw new IllegalStateException("Record has no id: call create() or read(id) first");
+            throw new IllegalStateException(
+                    "Record has no id: call create() or read(id) first"
+            );
         }
     }
 }

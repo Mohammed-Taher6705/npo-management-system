@@ -8,13 +8,13 @@ import BeneficiaryPage from './pages/BeneficiaryPage'
 import LookupPage from './pages/LookupPage'
 
 const pages = [
-  ['/', 'Health', <HealthPage />],
-  ['/users', 'Users', <UserPage />],
-  ['/events', 'Events', <EventPage />],
-  ['/donations', 'Donations', <DonationPage />],
-  ['/volunteers', 'Volunteers', <VolunteerPage />],
-  ['/beneficiaries', 'Beneficiaries', <BeneficiaryPage />],
-  ['/lookups', 'Lookups', <LookupPage />],
+  ['/health', 'Health', HealthPage],
+  ['/users', 'Users', UserPage],
+  ['/events', 'Events', EventPage],
+  ['/donations', 'Donations', DonationPage],
+  ['/volunteers', 'Volunteers', VolunteerPage],
+  ['/beneficiaries', 'Beneficiaries', BeneficiaryPage],
+  ['/lookups', 'Lookups', LookupPage],
 ]
 
 export default function App() {
@@ -28,7 +28,8 @@ export default function App() {
       </nav>
       <main className="content">
         <Routes>
-          {pages.map(([path, , el]) => <Route key={path} path={path} element={el} />)}
+          <Route path="/" element={<LookupPage />} />
+          {pages.map(([path, , Page]) => <Route key={path} path={path} element={<Page />} />)}
         </Routes>
       </main>
     </BrowserRouter>

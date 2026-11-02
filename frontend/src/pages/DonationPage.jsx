@@ -2,27 +2,9 @@
 // Lists donations, records a new money or in-kind donation, changes status, deletes, shows a summary.
 import { useCallback, useEffect, useState } from 'react'
 
-// ---- Config ----
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8080/api'
-const STATUSES = ['PENDING', 'COMPLETED', 'FAILED', 'RECEIVED', 'CANCELLED']
+import { request } from '../api'
 
-// ---- API client (talks to DonationController) ----
-async function request(path, options) {
-  const res = await fetch(`${API}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
-    ...options,
-  })
-  if (!res.ok) {
-    let text = await res.text()
-    try {
-      text = JSON.parse(text).message || text // Spring error body
-    } catch {
-      /* plain text */
-    }
-    throw new Error(text || `Request failed (${res.status})`)
-  }
-  return res.status === 204 ? null : res.json()
-}
+const STATUSES = ['PENDING', 'COMPLETED', 'FAILED', 'RECEIVED', 'CANCELLED']
 
 const api = {
   list: () => request('/donations'),

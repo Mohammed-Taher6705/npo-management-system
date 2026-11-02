@@ -1,17 +1,22 @@
-// Shared helper for calling the Spring Boot REST API.
-async function request(method, url, body) {
-  const res = await fetch(`/api${url}`, {
-    method,
-    headers: { 'Content-Type': 'application/json' },
-    body: body ? JSON.stringify(body) : undefined,
+const API_BASE = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '')
+
+export async function request(url, options = {}) {
+  const res = await fetch(`${API_BASE}${url}`, {
+    ...options,
+    headers: { 'Content-Type': 'application/json', ...options.headers },
   })
-  if (!res.ok) throw new Error(await res.text())
+  if (!res.ok) {
+    const raw = await res.text()
+    let message = raw
+    try { const data = JSON.parse(raw); message = data.message || data.detail || data.error || raw } catch { /* plain text response */ }
+    throw new Error(message || `Request failed (${res.status})`)
+  }
   return res.status === 204 ? null : res.json()
 }
 
 export const api = {
-  get: (url) => request('GET', url),
-  post: (url, body) => request('POST', url, body),
-  put: (url, body) => request('PUT', url, body),
-  del: (url) => request('DELETE', url),
+  get: (url, options) => request(url, options),
+  post: (url, body) => request(url, { method: 'POST', body: JSON.stringify(body) }),
+  put: (url, body) => request(url, { method: 'PUT', body: JSON.stringify(body) }),
+  del: (url) => request(url, { method: 'DELETE' }),
 }

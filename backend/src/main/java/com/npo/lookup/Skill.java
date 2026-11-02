@@ -5,35 +5,62 @@ import java.util.Map;
 import org.bson.Document;
 
 public class Skill extends LookupTable {
+
     private String level;
 
-    public Skill() { }
-  
+    public Skill() {
+    }
+
     public Skill(String name, String level) {
         super(name);
         this.level = level;
     }
 
-    // ----- getters / setters -----
-    public String getLevel() { 
-      return level; 
-    }
-    public void setLevel(String level) { 
-      this.level = level; 
+    public String getLevel() {
+        return level;
     }
 
-    @Override
-     protected String getCollectionName() {
-       return "skills"; 
-      }
+    public void setLevel(String level) {
+        this.level = level;
+    }
 
     @Override
-     protected void addExtraFields(Map<String, Object> data) { 
-      data.put("level", level);
-     }
+    protected String getCollectionName() {
+        return "skills";
+    }
 
     @Override
-     protected void loadExtraFields(Document doc) {
-       this.level = doc.getString("level"); 
+    protected void addExtraFields(Map<String, Object> data) {
+        data.put("level", level);
+    }
+
+    @Override
+    protected void loadExtraFields(Document doc) {
+        Object value = doc.get("level");
+
+        if (value != null && !(value instanceof String)) {
+            throw new IllegalArgumentException("Level must be text");
+        }
+
+        level = (String) value;
+    }
+
+    @Override
+    protected void validate() {
+        super.validate();
+
+        if (level == null || level.isBlank()) {
+            throw new IllegalArgumentException("Level is required");
+        }
+
+        level = level.strip();
+
+        if (!level.equals("Beginner")
+                && !level.equals("Intermediate")
+                && !level.equals("Advanced")) {
+            throw new IllegalArgumentException(
+                    "Level must be Beginner, Intermediate or Advanced"
+            );
+        }
     }
 }
