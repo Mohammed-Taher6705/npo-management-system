@@ -95,100 +95,215 @@ export default function BeneficiaryPage() {
   const set = key => e => setForm({ ...form, [key]: e.target.value })
 
   return (
-    <div>
-      <h2>Beneficiaries</h2>
-      {message && <p><b>{message}</b></p>}
+    <section className="lookup-page" aria-labelledby="beneficiaries-title">
+      <p className="eyebrow">NPO Management</p>
+      <h1 id="beneficiaries-title">Beneficiaries</h1>
+      <p className="muted">Manage beneficiaries, their needs, and urgent admin alerts.</p>
 
-      <h3>Add beneficiary</h3>
-      <form onSubmit={addBeneficiary}>
-        <input placeholder="Name" value={form.name} onChange={set('name')} required />{' '}
-        <input placeholder="Email" value={form.email} onChange={set('email')} required />{' '}
-        <input placeholder="Phone" value={form.phone} onChange={set('phone')} required />{' '}
-        <input placeholder="Password" type="password" value={form.password} onChange={set('password')} required />{' '}
-        <select value={form.preferredChannel} onChange={set('preferredChannel')}>
-          {CHANNELS.map(c => <option key={c}>{c}</option>)}
-        </select>{' '}
-        <input placeholder="Address" value={form.address} onChange={set('address')} required />{' '}
-        <label>
-          Family size{' '}
-          <input type="number" min="1" value={form.familySize} onChange={set('familySize')} required />
-        </label>{' '}
-        <button>Add</button>
-      </form>
-
-      <h3>All beneficiaries</h3>
-      <table border="1" cellPadding="6">
-        <thead>
-          <tr><th>Name</th><th>Address</th><th>Family size</th><th>Open needs</th><th></th></tr>
-        </thead>
-        <tbody>
-          {list.map(b => (
-            <tr key={b.id}>
-              <td>{b.name}</td>
-              <td>{b.address}</td>
-              <td>{b.familySize}</td>
-              <td>{b.needs.filter(n => n.status === 'OPEN').length}</td>
-              <td>
-                <button onClick={() => setSelected(b)}>Open</button>{' '}
-                <button onClick={() => deleteBeneficiary(b.id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {selected && (
-        <div>
-          <h3>Needs of {selected.name}</h3>
-
-          <form onSubmit={addNeed}>
-            <select value={need.categoryId} onChange={e => setNeed({ ...need, categoryId: e.target.value })} required>
-              <option value="">Choose category</option>
-              {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-            </select>{' '}
-            <select value={need.priority} onChange={e => setNeed({ ...need, priority: e.target.value })}>
-              {PRIORITIES.map(p => <option key={p}>{p}</option>)}
-            </select>{' '}
-            <button>Add need</button>
-          </form>
-          {categories.length === 0 && <p>No need categories yet: add some on the Lookups page.</p>}
-
-          <table border="1" cellPadding="6">
-            <thead>
-              <tr><th>Category</th><th>Priority</th><th>Status</th><th></th></tr>
-            </thead>
-            <tbody>
-              {selected.needs.map(n => (
-                <tr key={n.id} style={n.priority === 'HIGH' && n.status === 'OPEN' ? { color: '#b00020' } : {}}>
-                  <td>{n.category}</td>
-                  <td>
-                    <select value={n.priority} onChange={e => updateNeed(n, e.target.value, n.status)}>
-                      {PRIORITIES.map(p => <option key={p}>{p}</option>)}
-                    </select>
-                  </td>
-                  <td>{n.status}</td>
-                  <td>
-                    {n.status === 'OPEN'
-                      ? <button onClick={() => updateNeed(n, n.priority, 'FULFILLED')}>Mark fulfilled</button>
-                      : <button onClick={() => updateNeed(n, n.priority, 'OPEN')}>Reopen</button>}{' '}
-                    <button onClick={() => removeNeed(n.id)}>Remove</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      {message && (
+        <p className="notice success" role="status">{message}</p>
       )}
 
-      <h3>Urgent alerts received by admins (Observer)</h3>
-      {admins.length === 0 && <p>No admins yet: register an ADMIN on the Users page to receive alerts.</p>}
-      <select onChange={e => showAlerts(e.target.value)}>
-        <option value="">Choose admin</option>
-        {admins.map(a => <option key={a.id} value={a.id}>{a.name}</option>)}
-      </select>
-      <ul>
-        {alerts.map((n, i) => <li key={i}>[{n.status}] {n.content}</li>)}
-      </ul>
-    </div>
+      <form className="lookup-form" onSubmit={addBeneficiary}>
+        <h2>Add beneficiary</h2>
+
+        <label>
+          Name
+          <input placeholder="Name" value={form.name} onChange={set('name')} required />
+        </label>
+
+        <label>
+          Email
+          <input placeholder="Email" value={form.email} onChange={set('email')} required />
+        </label>
+
+        <label>
+          Phone
+          <input placeholder="Phone" value={form.phone} onChange={set('phone')} required />
+        </label>
+
+        <label>
+          Password
+          <input
+            placeholder="Password"
+            type="password"
+            value={form.password}
+            onChange={set('password')}
+            required
+          />
+        </label>
+
+        <label>
+          Preferred channel
+          <select value={form.preferredChannel} onChange={set('preferredChannel')}>
+            {CHANNELS.map(c => <option key={c}>{c}</option>)}
+          </select>
+        </label>
+
+        <label>
+          Address
+          <input placeholder="Address" value={form.address} onChange={set('address')} required />
+        </label>
+
+        <label>
+          Family size
+          <input
+            type="number"
+            min="1"
+            value={form.familySize}
+            onChange={set('familySize')}
+            required
+          />
+        </label>
+
+        <div className="actions">
+          <button type="submit" className="primary">Add beneficiary</button>
+        </div>
+      </form>
+
+      <h2>All beneficiaries</h2>
+
+      <div className="lookup-table">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">Family size</th>
+              <th scope="col">Open needs</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {list.map(b => (
+              <tr key={b.id}>
+                <td>{b.name}</td>
+                <td>{b.address}</td>
+                <td>{b.familySize}</td>
+                <td>{b.needs.filter(n => n.status === 'OPEN').length}</td>
+                <td>
+                  <div className="actions">
+                    <button onClick={() => setSelected(b)}>Open</button>
+                    <button className="danger" onClick={() => deleteBeneficiary(b.id)}>Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {selected && (
+        <section className="lookup-form">
+          <h2>Needs of {selected.name}</h2>
+
+          <form onSubmit={addNeed}>
+            <label>
+              Need category
+              <select
+                value={need.categoryId}
+                onChange={e => setNeed({ ...need, categoryId: e.target.value })}
+                required
+              >
+                <option value="">Choose category</option>
+                {categories.map(c => (
+                  <option key={c.id} value={c.id}>{c.name}</option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              Priority
+              <select
+                value={need.priority}
+                onChange={e => setNeed({ ...need, priority: e.target.value })}
+              >
+                {PRIORITIES.map(p => <option key={p}>{p}</option>)}
+              </select>
+            </label>
+
+            <div className="actions">
+              <button type="submit" className="primary">Add need</button>
+            </div>
+          </form>
+
+          {categories.length === 0 && (
+            <p className="notice">No need categories yet: add some on the Lookups page.</p>
+          )}
+
+          <h3>Beneficiary needs</h3>
+
+          <div className="lookup-table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Category</th>
+                  <th scope="col">Priority</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {selected.needs.map(n => (
+                  <tr
+                    key={n.id}
+                    style={n.priority === 'HIGH' && n.status === 'OPEN' ? { color: '#b00020' } : {}}
+                  >
+                    <td>{n.category}</td>
+                    <td>
+                      <select
+                        value={n.priority}
+                        onChange={e => updateNeed(n, e.target.value, n.status)}
+                      >
+                        {PRIORITIES.map(p => <option key={p}>{p}</option>)}
+                      </select>
+                    </td>
+                    <td>{n.status}</td>
+                    <td>
+                      <div className="actions">
+                        {n.status === 'OPEN'
+                          ? <button onClick={() => updateNeed(n, n.priority, 'FULFILLED')}>Mark fulfilled</button>
+                          : <button onClick={() => updateNeed(n, n.priority, 'OPEN')}>Reopen</button>}
+                        <button className="danger" onClick={() => removeNeed(n.id)}>Remove</button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      <section>
+        <h2>Urgent alerts received by admins (Observer)</h2>
+        <p className="muted">
+          HIGH priority needs generate URGENT notifications for administrators.
+        </p>
+
+        {admins.length === 0 && (
+          <p className="notice">
+            No admins yet: register an ADMIN on the Users page to receive alerts.
+          </p>
+        )}
+
+        <label>
+          Choose admin
+          <select onChange={e => showAlerts(e.target.value)}>
+            <option value="">Choose admin</option>
+            {admins.map(a => <option key={a.id} value={a.id}>{a.name}</option>)}
+          </select>
+        </label>
+
+        <ul>
+          {alerts.map((n, i) => (
+            <li key={i}>[{n.status}] {n.content}</li>
+          ))}
+        </ul>
+      </section>
+    </section>
   )
 }
+

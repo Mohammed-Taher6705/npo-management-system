@@ -1,7 +1,6 @@
 // View for DonationController.
 // Lists donations, records a new money or in-kind donation, changes status, deletes, shows a summary.
 import { useCallback, useEffect, useState } from 'react'
-
 import { request } from '../api'
 
 const STATUSES = ['PENDING', 'COMPLETED', 'FAILED', 'RECEIVED', 'CANCELLED']
@@ -54,40 +53,44 @@ function paymentPayload(p) {
   }
 }
 
-function PaymentFields({ value, onChange}) {
+function PaymentFields({ value, onChange }) {
   const set = (field) => (e) => onChange({ ...value, [field]: e.target.value })
+
   return (
     <>
-      <label style={s.label}>
+      <label>
         Payment method
-        <select style={s.input} value={value.paymentMethod} onChange={set('paymentMethod')}>
+        <select value={value.paymentMethod} onChange={set('paymentMethod')}>
           <option value="cash">Cash</option>
           <option value="check">Check</option>
           <option value="online">Online (card)</option>
         </select>
       </label>
+
       {value.paymentMethod === 'cash' && (
-        <label style={s.label}>
+        <label>
           Received by
-          <input style={s.input} value={value.receivedBy} onChange={set('receivedBy')} />
+          <input value={value.receivedBy} onChange={set('receivedBy')} />
         </label>
       )}
+
       {value.paymentMethod === 'check' && (
         <>
-          <label style={s.label}>
+          <label>
             Check number
-            <input style={s.input} value={value.checkNo} onChange={set('checkNo')} />
+            <input value={value.checkNo} onChange={set('checkNo')} />
           </label>
-          <label style={s.label}>
+          <label>
             Bank name
-            <input style={s.input} value={value.bankName} onChange={set('bankName')} />
+            <input value={value.bankName} onChange={set('bankName')} />
           </label>
         </>
       )}
+
       {value.paymentMethod === 'online' && (
-        <label style={s.label}>
+        <label>
           Card holder name
-          <input style={s.input} value={value.cardHolder} onChange={set('cardHolder')} />
+          <input value={value.cardHolder} onChange={set('cardHolder')} />
         </label>
       )}
     </>
@@ -108,6 +111,7 @@ const EMPTY_FORM = {
 // ---- View ----
 export default function DonationPage() {
   const [items, setItems] = useState([])
+  const [donors, setDonors] = useState([])
   const [form, setForm] = useState(null) // null = hidden
   const [selected, setSelected] = useState(null) // donation shown in the summary panel
   const [payForm, setPayForm] = useState(null) // { id, ...payment fields } while taking payment
@@ -133,11 +137,22 @@ export default function DonationPage() {
     refresh()
   }, [refresh])
 
+  // Load donors so the user can select a donor by name instead of entering an ID.
+  useEffect(() => {
+    request('/users')
+      .then((users) => {
+        setDonors(users.filter((user) => user.role === 'DONOR'))
+      })
+      .catch((e) => {
+        showError(`Could not load donors: ${e.message}`)
+      })
+  }, [])
+
   const set = (field) => (e) => setForm({ ...form, [field]: e.target.value })
 
   const save = async (e) => {
     e.preventDefault()
-    if (!form.donorId.trim()) return showError('Enter the donor id.')
+    if (!form.donorId.trim()) return showError('Select a donor.')
 
     let data
     if (form.type === 'money') {
@@ -228,182 +243,238 @@ export default function DonationPage() {
   const totalsText = Object.entries(totals).map(([c, v]) => `${v} ${c}`).join(', ')
 
   return (
-    <div style={s.page}>
-      <h2 style={s.title}>Donations</h2>
+    <section className="lookup-page" aria-labelledby="donations-title">
+      <p className="eyebrow">NPO Management</p>
+      <h1 id="donations-title">Donations</h1>
+      <p className="muted">Record and manage money and in-kind donations.</p>
 
       {message && (
-        <p role="status" style={{ ...s.message, ...(message.kind === 'error' ? s.error : s.ok) }}>
+        <p
+          role="status"
+          className={`notice ${message.kind === 'error' ? 'error' : 'success'}`}
+        >
           {message.text}
         </p>
       )}
 
-      <p style={s.summary}>
+      <p className="muted">
         {items.length} donation{items.length === 1 ? '' : 's'}
         {totalsText && ` · money received so far: ${totalsText}`}
       </p>
 
-      <div style={s.toolbar}>
-        <button style={s.primary} onClick={() => setForm({ ...EMPTY_FORM })}>
+      <div className="lookup-toolbar">
+        <button className="primary" onClick={() => setForm({ ...EMPTY_FORM })}>
           Record donation
         </button>
-        <button style={s.button} onClick={refresh} disabled={loading}>
+        <button onClick={refresh} disabled={loading}>
           {loading ? 'Loading…' : 'Refresh'}
         </button>
       </div>
 
       {form && (
-        <form onSubmit={save} style={s.form}>
-          <label style={s.label}>
+        <form className="lookup-form" onSubmit={save}>
+          <h2>Record donation</h2>
+
+          <label>
             Donation type
-            <select style={s.input} value={form.type} onChange={set('type')}>
+            <select value={form.type} onChange={set('type')}>
               <option value="money">Money</option>
               <option value="in-kind">In-kind (items)</option>
             </select>
           </label>
-          <label style={s.label}>
-            Donor id
-            <input style={s.input} value={form.donorId} onChange={set('donorId')} autoFocus />
+
+          <label>
+            Donor
+            <select
+              value={form.donorId}
+              onChange={set('donorId')}
+              required
+              autoFocus
+            >
+              <option value="">Select a donor</option>
+              {donors.map((donor) => (
+                <option key={donor.id} value={donor.id}>
+                  {donor.name} ({donor.email})
+                </option>
+              ))}
+            </select>
           </label>
+
+          {donors.length === 0 && (
+            <p className="muted">
+              No donors found. Register a user with the DONOR role first.
+            </p>
+          )}
 
           {form.type === 'money' ? (
             <>
-              <label style={s.label}>
+              <label>
                 Amount
-                <input style={s.input} type="number" min="0" step="0.01" value={form.amount} onChange={set('amount')} />
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={form.amount}
+                  onChange={set('amount')}
+                />
               </label>
-              <label style={s.label}>
+
+              <label>
                 Currency
-                <input style={s.input} value={form.currency} onChange={set('currency')} />
+                <input value={form.currency} onChange={set('currency')} />
               </label>
+
               <PaymentFields value={form} onChange={setForm} allowLater />
             </>
           ) : (
             <>
-              <label style={s.label}>
+              <label>
                 Item name
-                <input style={s.input} value={form.itemName} onChange={set('itemName')} />
+                <input value={form.itemName} onChange={set('itemName')} />
               </label>
-              <label style={s.label}>
+
+              <label>
                 Quantity
-                <input style={s.input} type="number" min="1" step="1" value={form.quantity} onChange={set('quantity')} />
+                <input
+                  type="number"
+                  min="1"
+                  step="1"
+                  value={form.quantity}
+                  onChange={set('quantity')}
+                />
               </label>
-              <label style={s.label}>
+
+              <label>
                 Estimated value
-                <input style={s.input} type="number" min="0" step="0.01" value={form.estimatedValue} onChange={set('estimatedValue')} />
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={form.estimatedValue}
+                  onChange={set('estimatedValue')}
+                />
               </label>
             </>
           )}
 
-          <div style={s.toolbar}>
-            <button type="submit" style={s.primary}>Record donation</button>
-            <button type="button" style={s.button} onClick={() => setForm(null)}>Cancel</button>
+          <div className="actions">
+            <button type="submit" className="primary">Record donation</button>
+            <button type="button" onClick={() => setForm(null)}>Cancel</button>
           </div>
         </form>
       )}
 
       {payForm && (
-        <form onSubmit={payNow} style={s.form}>
-          <strong>Take payment</strong>
+        <form className="lookup-form" onSubmit={payNow}>
+          <h2>Take payment</h2>
+
           <PaymentFields value={payForm} onChange={setPayForm} />
-          <div style={s.toolbar}>
-            <button type="submit" style={s.primary}>Take payment</button>
-            <button type="button" style={s.button} onClick={() => setPayForm(null)}>Cancel</button>
+
+          <div className="actions">
+            <button type="submit" className="primary">Take payment</button>
+            <button type="button" onClick={() => setPayForm(null)}>Cancel</button>
           </div>
         </form>
       )}
 
       {selected && (
-        <div style={s.panel}>
-          <strong>Donation summary</strong>
-          <dl style={s.dl}>
-            <dt>Type</dt><dd>{isInKind(selected) ? 'In-kind' : 'Money'}</dd>
-            <dt>Donor</dt><dd>{donorLabel(selected)}</dd>
-            <dt>Details</dt><dd>{detailsOf(selected)}</dd>
-            {selected.transactionId && (<><dt>Transaction</dt><dd>{selected.transactionId}</dd></>)}
-            <dt>Status</dt><dd>{selected.status}</dd>
-            <dt>Date</dt><dd>{dateOf(selected)}</dd>
-            <dt>Id</dt><dd>{selected.id}</dd>
+        <section className="lookup-form">
+          <h2>Donation summary</h2>
+
+          <dl className="donation-summary">
+            <dt>Type</dt>
+            <dd>{isInKind(selected) ? 'In-kind' : 'Money'}</dd>
+
+            <dt>Donor</dt>
+            <dd>{donorLabel(selected)}</dd>
+
+            <dt>Details</dt>
+            <dd>{detailsOf(selected)}</dd>
+
+            {selected.transactionId && (
+              <>
+                <dt>Transaction</dt>
+                <dd>{selected.transactionId}</dd>
+              </>
+            )}
+
+            <dt>Status</dt>
+            <dd>{selected.status}</dd>
+
+            <dt>Date</dt>
+            <dd>{dateOf(selected)}</dd>
+
+            <dt>Id</dt>
+            <dd>{selected.id}</dd>
           </dl>
-          <button style={s.button} onClick={() => setSelected(null)}>Close</button>
-        </div>
+
+          <button onClick={() => setSelected(null)}>Close</button>
+        </section>
       )}
 
-      <table style={s.table}>
-        <thead>
-          <tr>
-            <th style={s.th}>Date</th>
-            <th style={s.th}>Type</th>
-            <th style={s.th}>Donor</th>
-            <th style={s.th}>Details</th>
-            <th style={s.th}>Status</th>
-            <th style={s.th}></th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((d) => (
-            <tr key={d.id}>
-              <td style={s.td}>{dateOf(d)}</td>
-              <td style={s.td}>{isInKind(d) ? 'In-kind' : 'Money'}</td>
-              <td style={s.td}>{donorLabel(d)}</td>
-              <td style={s.td}>{detailsOf(d)}</td>
-              <td style={s.td}>
-                <select
-                  value={d.status}
-                  onChange={(e) => changeStatus(d, e.target.value)}
-                  aria-label="Donation status"
-                >
-                  {[...new Set([d.status, ...STATUSES])].filter(Boolean).map((st) => (
-                    <option key={st}>{st}</option>
-                  ))}
-                </select>
-              </td>
-              <td style={{ ...s.td, textAlign: 'right', whiteSpace: 'nowrap' }}>
-                {!isInKind(d) && d.status === 'PENDING' && (
-                  <>
-                    <button
-                      style={s.button}
-                      onClick={() => setPayForm({ id: d.id, ...EMPTY_PAYMENT, paymentMethod: 'cash' })}
-                    >
-                      Take payment
-                    </button>{' '}
-                  </>
-                )}
-                <button style={s.button} onClick={() => showDonationSummary(d)}>View</button>{' '}
-                <button style={s.danger} onClick={() => remove(d)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-          {!loading && items.length === 0 && (
+      <h2>All donations</h2>
+
+      <div className="lookup-table">
+        <table>
+          <thead>
             <tr>
-              <td style={s.td} colSpan={6}>
-                No donations yet. Use “Record donation” to add the first one.
-              </td>
+              <th scope="col">Date</th>
+              <th scope="col">Type</th>
+              <th scope="col">Donor</th>
+              <th scope="col">Details</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
             </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+
+          <tbody>
+            {items.map((d) => (
+              <tr key={d.id}>
+                <td>{dateOf(d)}</td>
+                <td>{isInKind(d) ? 'In-kind' : 'Money'}</td>
+                <td>{donorLabel(d)}</td>
+                <td>{detailsOf(d)}</td>
+
+                <td>
+                  <select
+                    value={d.status}
+                    onChange={(e) => changeStatus(d, e.target.value)}
+                    aria-label="Donation status"
+                  >
+                    {[...new Set([d.status, ...STATUSES])].filter(Boolean).map((st) => (
+                      <option key={st}>{st}</option>
+                    ))}
+                  </select>
+                </td>
+
+                <td>
+                  <div className="actions">
+                    {!isInKind(d) && d.status === 'PENDING' && (
+                      <button
+                        onClick={() => setPayForm({ id: d.id, ...EMPTY_PAYMENT, paymentMethod: 'cash' })}
+                      >
+                        Take payment
+                      </button>
+                    )}
+
+                    <button onClick={() => showDonationSummary(d)}>View</button>
+                    <button className="danger" onClick={() => remove(d)}>Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+
+            {!loading && items.length === 0 && (
+              <tr>
+                <td colSpan={6}>
+                  No donations yet. Use “Record donation” to add the first one.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </section>
   )
 }
 
-// Minimal inline styles (same look as LookupPage) so it works without a CSS framework.
-const s = {
-  page: { maxWidth: 900, margin: '0 auto', padding: 16, fontFamily: 'system-ui, sans-serif' },
-  title: { margin: '0 0 12px' },
-  summary: { margin: '0 0 8px', color: '#444' },
-  toolbar: { display: 'flex', gap: 8, margin: '12px 0' },
-  button: { padding: '6px 12px', cursor: 'pointer' },
-  primary: { padding: '6px 12px', cursor: 'pointer', background: '#2563eb', color: '#fff', border: 'none', borderRadius: 4 },
-  danger: { padding: '6px 12px', cursor: 'pointer', color: '#b91c1c' },
-  form: { display: 'grid', gap: 10, padding: 12, border: '1px solid #ddd', borderRadius: 6, marginBottom: 12 },
-  label: { display: 'grid', gap: 4, fontSize: 14 },
-  input: { padding: 6, fontSize: 15 },
-  panel: { padding: 12, border: '1px solid #bfdbfe', background: '#eff6ff', borderRadius: 6, marginBottom: 12 },
-  dl: { display: 'grid', gridTemplateColumns: 'max-content 1fr', gap: '4px 16px', margin: '8px 0' },
-  message: { padding: '8px 12px', borderRadius: 4, margin: '0 0 8px' },
-  ok: { background: '#dcfce7', color: '#166534' },
-  error: { background: '#fee2e2', color: '#991b1b' },
-  table: { width: '100%', borderCollapse: 'collapse' },
-  th: { textAlign: 'left', padding: 8, borderBottom: '2px solid #ccc' },
-  td: { padding: 8, borderBottom: '1px solid #eee' },
-}

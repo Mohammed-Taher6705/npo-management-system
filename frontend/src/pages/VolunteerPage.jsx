@@ -133,128 +133,271 @@ export default function VolunteerPage() {
   }
 
   return (
-    <div>
-      <h2>Volunteers</h2>
-      {message && <p><b>{message}</b></p>}
+    <section className="lookup-page" aria-labelledby="volunteers-title">
+      <p className="eyebrow">NPO Management</p>
+      <h1 id="volunteers-title">Volunteers</h1>
+      <p className="muted">Manage volunteer tasks, assignments, working hours, and unavailable dates.</p>
 
-      <h3>Create task</h3>
-      <form onSubmit={createTask}>
-        <input placeholder="Title" value={form.title} onChange={set('title')} required />{' '}
-        <input type="date" value={form.date} onChange={set('date')} required />{' '}
-        <input placeholder="Location" value={form.location} onChange={set('location')} required />{' '}
-        <button>Create</button>
+      {message && (
+        <p className="notice success" role="status">{message}</p>
+      )}
+
+      <form className="lookup-form" onSubmit={createTask}>
+        <h2>Create task</h2>
+        <fieldset>
+          <label>
+            Title
+            <input placeholder="Title" value={form.title} onChange={set('title')} required />
+          </label>
+
+          <label>
+            Date
+            <input type="date" value={form.date} onChange={set('date')} required />
+          </label>
+
+          <label>
+            Location
+            <input placeholder="Location" value={form.location} onChange={set('location')} required />
+          </label>
+
+          <div className="actions">
+            <button className="primary" type="submit">Create</button>
+          </div>
+        </fieldset>
       </form>
 
-      <h3>All tasks</h3>
-      <table border="1" cellPadding="6">
-        <thead>
-          <tr><th>Title</th><th>Date</th><th>Location</th><th>Volunteers</th><th></th></tr>
-        </thead>
-        <tbody>
-          {tasks.map(t => (
-            <tr key={t.id}>
-              <td>{t.title}</td>
-              <td>{day(t.date)}</td>
-              <td>{t.location}</td>
-              <td>{t.assignees.length}</td>
-              <td>
-                <button onClick={() => openTask(t)}>Open</button>{' '}
-                <button onClick={() => deleteTask(t.id)}>Delete</button>
-              </td>
+      <h2>All tasks</h2>
+      <div className="lookup-table">
+        <table>
+          <caption>Tasks</caption>
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Date</th>
+              <th scope="col">Location</th>
+              <th scope="col">Volunteers</th>
+              <th scope="col">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {tasks.map(t => (
+              <tr key={t.id}>
+                <td>{t.title}</td>
+                <td>{day(t.date)}</td>
+                <td>{t.location}</td>
+                <td>{t.assignees.length}</td>
+                <td>
+                  <div className="actions">
+                    <button onClick={() => openTask(t)}>Open</button>
+                    <button className="danger" onClick={() => deleteTask(t.id)}>Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+            {!tasks.length && (
+              <tr>
+                <td colSpan={5}>No tasks to display. Create a task to get started.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
 
       {selected && (
-        <div>
-          <h3>{selected.title}</h3>
+        <section className="lookup-form">
+          <h2>{selected.title}</h2>
 
-          <h4>Change date / location (notifies volunteers)</h4>
           <form onSubmit={editTask}>
-            <input type="date" value={edit.date} onChange={setE('date')} required />{' '}
-            <input placeholder="Location" value={edit.location} onChange={setE('location')} required />{' '}
-            <button>Save</button>
+            <h3>Change date / location</h3>
+            <p className="muted">Updating the task date or location notifies assigned volunteers.</p>
+
+            <fieldset>
+              <label>
+                Date
+                <input type="date" value={edit.date} onChange={setE('date')} required />
+              </label>
+
+              <label>
+                Location
+                <input placeholder="Location" value={edit.location} onChange={setE('location')} required />
+              </label>
+
+              <div className="actions">
+                <button className="primary" type="submit">Save</button>
+              </div>
+            </fieldset>
           </form>
 
-          <h4>Assign volunteer</h4>
+          <h3>Assign volunteer</h3>
           <form onSubmit={assign}>
-            <select value={assignId} onChange={e => setAssignId(e.target.value)} required>
-              <option value="">Choose volunteer</option>
-              {volunteers.map(v => <option key={v.id} value={v.id}>{v.name} ({v.availability})</option>)}
-            </select>{' '}
-            <button>Assign</button>
+            <fieldset>
+              <label>
+                Volunteer
+                <select value={assignId} onChange={e => setAssignId(e.target.value)} required>
+                  <option value="">Choose volunteer</option>
+                  {volunteers.map(v => (
+                    <option key={v.id} value={v.id}>{v.name} ({v.availability})</option>
+                  ))}
+                </select>
+              </label>
+
+              <div className="actions">
+                <button className="primary" type="submit">Assign</button>
+              </div>
+            </fieldset>
           </form>
 
-          <h4>Assigned volunteers</h4>
-          <table border="1" cellPadding="6">
-            <thead>
-              <tr><th>Name</th><th>Availability</th><th>Total hours</th><th></th></tr>
-            </thead>
-            <tbody>
-              {selected.assignees.map(a => (
-                <tr key={a.id}>
-                  <td>{a.name}</td>
-                  <td>{a.availability}</td>
-                  <td>{a.totalHours}</td>
-                  <td><button onClick={() => unassign(a.id)}>Remove</button></td>
+          <h3>Assigned volunteers</h3>
+          <div className="lookup-table">
+            <table>
+              <caption>Assigned volunteers</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Availability</th>
+                  <th scope="col">Total hours</th>
+                  <th scope="col">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {selected.assignees.map(a => (
+                  <tr key={a.id}>
+                    <td>{a.name}</td>
+                    <td>{a.availability}</td>
+                    <td>{a.totalHours}</td>
+                    <td>
+                      <button className="danger" onClick={() => unassign(a.id)}>Remove</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-          <h4>Log hours</h4>
+          <h3>Log hours</h3>
           <form onSubmit={logHours}>
-            <select value={hours.volunteerId} onChange={e => setHours({ ...hours, volunteerId: e.target.value })} required>
-              <option value="">Choose volunteer</option>
-              {selected.assignees.map(a => <option key={a.id} value={a.id}>{a.name}</option>)}
-            </select>{' '}
-            <input type="number" min="0.5" step="0.5" value={hours.hours}
-              onChange={e => setHours({ ...hours, hours: e.target.value })} required />{' '}
-            <button>Log</button>
+            <fieldset>
+              <label>
+                Volunteer
+                <select value={hours.volunteerId} onChange={e => setHours({ ...hours, volunteerId: e.target.value })} required>
+                  <option value="">Choose volunteer</option>
+                  {selected.assignees.map(a => (
+                    <option key={a.id} value={a.id}>{a.name}</option>
+                  ))}
+                </select>
+              </label>
+
+              <label>
+                Hours
+                <input
+                  type="number"
+                  min="0.5"
+                  step="0.5"
+                  value={hours.hours}
+                  onChange={e => setHours({ ...hours, hours: e.target.value })}
+                  required
+                />
+              </label>
+
+              <div className="actions">
+                <button className="primary" type="submit">Log</button>
+              </div>
+            </fieldset>
           </form>
-        </div>
+        </section>
       )}
 
-      <h3>Volunteer details</h3>
-      <select value={volunteer} onChange={e => loadVolunteer(e.target.value)}>
-        <option value="">Choose volunteer</option>
-        {volunteers.map(v => <option key={v.id} value={v.id}>{v.name}</option>)}
-      </select>
+      <h2>Volunteer details</h2>
+      <div className="lookup-toolbar">
+        <label>
+          Select volunteer
+          <select value={volunteer} onChange={e => loadVolunteer(e.target.value)}>
+            <option value="">Choose volunteer</option>
+            {volunteers.map(v => (
+              <option key={v.id} value={v.id}>{v.name}</option>
+            ))}
+          </select>
+        </label>
+      </div>
 
       {volunteer && (
-        <div>
-          <h4>Hours history (total: {total})</h4>
-          <table border="1" cellPadding="6">
-            <thead>
-              <tr><th>Date</th><th>Task</th><th>Hours</th><th></th></tr>
-            </thead>
-            <tbody>
-              {logs.map(l => (
-                <tr key={l.id}>
-                  <td>{day(l.date)}</td>
-                  <td>{l.taskTitle}</td>
-                  <td>{l.hours}</td>
-                  <td><button onClick={() => deleteLog(l.id)}>Delete</button></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <section className="lookup-form">
+          <h3>Hours history (total: {total})</h3>
 
-          <h4>Unavailable dates</h4>
+          <div className="lookup-table">
+            <table>
+              <caption>Volunteer hours history</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Task</th>
+                  <th scope="col">Hours</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {logs.map(l => (
+                  <tr key={l.id}>
+                    <td>{day(l.date)}</td>
+                    <td>{l.taskTitle}</td>
+                    <td>{l.hours}</td>
+                    <td>
+                      <button className="danger" onClick={() => deleteLog(l.id)}>Delete</button>
+                    </td>
+                  </tr>
+                ))}
+                {!logs.length && (
+                  <tr>
+                    <td colSpan={4}>No hours recorded yet.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Unavailable dates</h3>
           <form onSubmit={addOffDate}>
-            <input type="date" value={offDate} onChange={e => setOffDate(e.target.value)} required />{' '}
-            <button>Add</button>
+            <fieldset>
+              <label>
+                Date
+                <input type="date" value={offDate} onChange={e => setOffDate(e.target.value)} required />
+              </label>
+
+              <div className="actions">
+                <button className="primary" type="submit">Add</button>
+              </div>
+            </fieldset>
           </form>
-          <ul>
-            {offDates.map(d => (
-              <li key={d}>
-                {day(d)} <button onClick={() => removeOffDate(d)}>Remove</button>
-              </li>
-            ))}
-          </ul>
-        </div>
+
+          <div className="lookup-table">
+            <table>
+              <caption>Unavailable dates</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {offDates.map(d => (
+                  <tr key={d}>
+                    <td>{day(d)}</td>
+                    <td>
+                      <button className="danger" onClick={() => removeOffDate(d)}>Remove</button>
+                    </td>
+                  </tr>
+                ))}
+                {!offDates.length && (
+                  <tr>
+                    <td colSpan={2}>No unavailable dates recorded.</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
       )}
-    </div>
+    </section>
   )
 }
+

@@ -26,10 +26,13 @@ export default function App() {
           <NavLink key={path} to={path} end>{label}</NavLink>
         ))}
       </nav>
+
       <main className="content">
         <Routes>
           <Route path="/" element={<LookupPage />} />
-          {pages.map(([path, , Page]) => <Route key={path} path={path} element={<Page />} />)}
+          {pages.map(([path, , Page]) => (
+            <Route key={path} path={path} element={<Page />} />
+          ))}
         </Routes>
       </main>
     </BrowserRouter>
