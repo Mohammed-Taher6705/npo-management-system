@@ -61,6 +61,7 @@ function PaymentFields({ value, onChange }) {
       <label>
         Payment method
         <select value={value.paymentMethod} onChange={set('paymentMethod')}>
+          <option value="">Pay later</option>
           <option value="cash">Cash</option>
           <option value="check">Check</option>
           <option value="online">Online (card)</option>
